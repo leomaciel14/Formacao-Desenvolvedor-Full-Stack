@@ -6,6 +6,15 @@ mostre uma listagem com todos os nomes informados, na ordem inversa daquela em
 que eles foram informados.
 */
 
+function inverterArray(array) {
+    let invertida = [];
+    for (let i = array.length - 1; i >= 0; i--) {
+        invertida.push(array[i]);
+    }
+    return invertida;
+}
+
 let nomes = ['Juliana', 'Leonardo', 'Rafael', 'Jucelino', 'Juvenal', 'Clementina', 'Maria'];
-let nomesRevertido = nomes.reverse();
-console.log(nomesRevertido)
+let arrayInvertida = inverterArray(nomes);
+console.log("Array original:", nomes);
+console.log("Array invertida:", arrayInvertida);
