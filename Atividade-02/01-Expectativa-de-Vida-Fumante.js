@@ -25,4 +25,4 @@ console.log(`------------ATENÇÃO------------`);
 console.log("Fumar traz graves riscos à saúde, levando a doenças cardíacas, câncer, problemas respiratórios e redução da expectativa de vida.");
 console.log("Se você ou alguém que conhece deseja parar de fumar, ajuda está disponível.");
 console.log("Ligue 136 para acessar recursos e suporte.");
-console.log(`------------------------------`);
+console.log(`------------------------------`);       
