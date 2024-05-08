@@ -9,17 +9,12 @@ let notacao = 7;
 let matriz = new Array
 
 for (let i = 0; i < notacao; i++) {
-    let linha = Array(notacao).fill(0);
-    matriz.push(linha);
+    matriz.push(new Array(notacao).fill(0));
 }
 
-let contador = 0
-
-for (let j = 0; j < notacao; j++) {
-    let linha = Array(notacao).fill(0);
-    matriz.push(linha);
+for (let k = 0; k < notacao; k++) {
+    matriz[k][k] = 1;
 }
-
 
 for (let i = 0; i < notacao; i++) {
     console.log(matriz[i].join(','));
