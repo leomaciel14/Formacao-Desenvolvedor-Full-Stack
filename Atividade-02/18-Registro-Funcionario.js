@@ -13,9 +13,15 @@ const registro = {
     salario:0
 }
 
+console.log('----Registro----')
+console.log(registro)
+console.log('')
+
 registro.nome = prompt(`Digite o seu nome: `);
 registro.cargo = prompt(`Digite o seu cargo: `);
 registro.salario = prompt(`Digite o seu salário: `);
 
+console.log('')
+console.log('----Registro Atualizado----')
 console.log(registro)
 
