@@ -12,18 +12,23 @@ function multiplyMatrix(matrixA, matrixB){
     const colunasB = matrixB[0].length;
     const resultado = [];
 
-    for(let i = 0; i < linhasA; i++){
-        resultado[i] = [];
-        for (let j = 0; j < colunasB; j++){
-            let soma = 0;
-            for (let k = 0; k < colunasA; k++){
-                soma += matrixA[i][k] * matrixB[k][j]
+    if (colunasA !== linhasB){
+        console.log('Impossível gerar o produto das matrizes, pois o número de colunas da Matriz A deve ser igual ao número de linhas da Matriz B.')
+        return;
+    } else{
+        for(let i = 0; i < linhasA; i++){
+            resultado[i] = [];
+            for (let j = 0; j < colunasB; j++){
+                let soma = 0;
+                for (let k = 0; k < colunasA; k++){
+                    soma += matrixA[i][k] * matrixB[k][j]
+                }
+                resultado[i][j] = soma;
             }
-            resultado[i][j] = soma;
         }
+        
+        return resultado;
     }
-    
-    return resultado;
 }
 
 function randomBetween(min, max) {
@@ -43,16 +48,19 @@ function generateRandomMatrix(rows, cols) {
     return matrix;
 }
 
-const matrixA = generateRandomMatrix(1, 2);
-const matrixB = generateRandomMatrix(1, 2);
-
-const matrizResultado = multiplyMatrix(matrixA, matrixB);
+const matrixA = generateRandomMatrix(3, 5);
+const matrixB = generateRandomMatrix(5, 3);
 
 function plotarMatrix(Array){
+    if (!Array || Array.length === 0) {
+        console.log("Impossível plotar a matriz: Array inválido.");
+        return;
+    }
+
     for (let i = 0; i < Array.length; i++) {
         console.log(Array[i].join(' , '));
     }
 }
 
+const matrizResultado = multiplyMatrix(matrixA, matrixB);
 plotarMatrix(matrizResultado)
-
