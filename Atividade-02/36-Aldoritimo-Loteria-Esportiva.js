@@ -21,20 +21,6 @@ function gerarVetor(quantidade, min, max) {
     return vetor;
 }
 
-function separarParesImpares(array) {
-    const unidades = array.length;
-    let vetoresPares = []
-    let vetoresImpares = []
-    for (let i = 0; i < unidades; i++) {
-        if (array[i] % 2 == 0) {
-            vetoresPares.push(array[i])
-        } else {
-            vetoresImpares.push(array[i])
-        }
-    }
-    return { vetoresPares, vetoresImpares };
-}
-
 function gerarApostadores(apostadores, numerosCartela, min, max) {
     let apostas = [];
     for (let i = 0; i < apostadores; i++) {
