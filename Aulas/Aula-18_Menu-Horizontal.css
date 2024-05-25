@@ -1,0 +1,82 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    font-style: normal;
+    background-color: #111;
+    color: #fff;
+}
+
+.header {
+    background-color: #000;
+    color: white;
+    padding: 15px;
+}
+
+.logo img {
+    width: 155px;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.vertical-menu {
+    float: left;
+    margin-left: 350px;
+    margin-top: -67px;
+    background-color: transparent;
+}
+
+:root {
+    --gradient-1: linear-gradient(to right, rgba(0, 255, 30, 0), rgba(44, 250, 243, 0));
+    --gradient-2: linear-gradient(to right, rgba(255, 68, 0, 1), rgba(250, 154, 44, 1));
+}
+
+.vertical-menu a {
+    text-align: center;
+    text-decoration: none;
+    border-radius: 100px;
+    display: inline-block;
+    padding: 14px 20px;
+    color: white;
+    background: var(--gradient-1);
+    margin-left: 15px;
+}
+
+.menu-item {
+    position: relative;
+    z-index: 1;
+    background: var(--gradient-1);
+}
+
+.menu-item::before {
+    border-radius: 100px;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-2);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: -1;
+}
+
+.menu-item:hover::before {
+    opacity: 1;
+    font-weight: 500;
+}
+
+.vertical-menu a.active {
+    transition: ease-in-out;
+    color: #fff;
+    font-weight: 700;
+    background-color: #111;
+}
+
+.content {
+    padding: 20px;
+}
+
+.content h1,
+.content p {
+    margin-bottom: 20px;
+}

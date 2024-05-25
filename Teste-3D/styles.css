@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: "Lato", sans-serif;
+    font-variant-numeric: tabular-nums;
+    font-optical-sizing: auto;
+    font-weight: 1rem;
+    font-style: normal;
+    background-color: red;
+}
+
+.nav-space{
+    background-color: #161617cc;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-products ul{
+    font-size: .75rem;
+    line-height: 1rem;
+    color: #d5d5d5;
+    display: flex;
+    text-align: center;
+    list-style: none;
+}
+
+.menu-products ul li{
+    padding: 10px 20px 10px 20px;
+}
+
+.menu-products ul li:hover{
+    color: white;
+}
+
+.menu-icons {
+    display: flex;
+    fill: white;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.menu-icons img {
+    margin: 5px;
+    width: 1rem;
+}
+
+.logo {
+    margin-left: 20px;
+    max-width: 3rem;
+    max-width: 3rem;
+    padding: 5px 10px 5px 10px;
+}
+
+.h3_content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.title-text-block{
+    font-weight: 900;
+    margin-top: 30px;
+    font-size: 4rem;
+}
+
+.sub-text-block{
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+.content-text-block{
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.button-cta{
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 20px 10px 20px;
+    font-size: 1.2rem;
+    width: 180px;
+    border-radius: 30px;
+    background-color: #2b73db;
+    color: #fff;
+}
+
+.button-cta:hover{
+    background-color: #fff;
+    color: #2b73db;
+}

@@ -1,0 +1,88 @@
+/* Reset CSS básico */
+
+/* Elementos de bloco padrão */
+body,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+blockquote,
+address,
+fieldset,
+form,
+legend,
+table,
+caption,
+thead,
+tbody,
+tfoot,
+tr,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+/* Estilos específicos para HTML5 */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+/* Ajustes para links */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Corrigir comportamento de fonte em alguns navegadores */
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+}
+
+/* Corrigir erro no IE7 para espaçamento em listas */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Elementos incorporados (embeds) são por padrão linha, assim corrigimos isso */
+embed,
+iframe,
+object,
+audio,
+
+
+/* Elementos de conteúdo fonte (source) manter consistência entre os navegadores */
+[hidden] {
+    display: none;
+}

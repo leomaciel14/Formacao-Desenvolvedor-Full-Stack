@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background-color: #111;
+    color: #fff;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #FF4500, #fa9a2c);
+    color: white;
+    padding: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+.hamburger-menu {
+    display: flex;
+    align-items: center;
+    width: 80px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.vertical-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    margin-top: 83px;
+    width: 250px;
+    height: 100%;
+    background-color: #666;
+    color: black;
+    left: -250px;
+    overflow: auto;
+    transition: left 0.3s;
+    z-index: 2;
+}
+
+.vertical-menu.open {
+    left: 0;
+}
+
+.vertical-menu a {
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    color: #ccc;
+    font-weight: 300;
+}
+
+.vertical-menu a:hover {
+    background-color: #555;
+    color: white;
+}
+
+.vertical-menu a.active {
+    font-weight: 700;
+    background-color: rgb(46, 46, 46);
+    color: white;
+    transition: background-color 0.5s;
+}
+
+.vertical-menu.open+.content {
+    margin-left: 250px;
+}
+
+.content {
+    margin-left: 5%;
+    margin-top: 50px;
+    padding: 20px;
+    flex-grow: 1;
+    text-align: center;
+    transition: margin-left 0.3s;
+}
