@@ -1,0 +1,128 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 23.11.2021 11:20:57
+
+newmtl airpods_max_silver_white_mesh_inside
+	Ns 71.428574
+	Ni 1.600000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.500000 0.500000 0.500000
+	Ks 0.033176 0.033176 0.033176
+	Ke 0.000000 0.000000 0.000000
+	map_Ka airpods_max_silver_01_diffuse.jpg
+	map_Kd airpods_max_silver_01_diffuse.jpg
+	map_d airpods_max_silver_01_opacity.jpg
+	map_bump airpods_max_silver_01_bump.jpg
+	bump airpods_max_silver_01_bump.jpg
+
+newmtl airpods_max_silver_earbuds
+	Ns 29.999998
+	Ni 1.600000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.500000 0.500000 0.500000
+	Ks 0.032471 0.032471 0.032471
+	Ke 0.000000 0.000000 0.000000
+	map_Ka airpods_max_silver_02_diffuse.jpg
+	map_Kd airpods_max_silver_02_diffuse.jpg
+	map_bump airpods_max_silver_02_bump.jpg
+	bump airpods_max_silver_02_bump.jpg
+
+newmtl airpods_max_silver_white_top
+	Ns 32.142857
+	Ni 1.600000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.807843 0.807843 0.807843
+	Ks 0.129882 0.129882 0.129882
+	Ke 0.000000 0.000000 0.000000
+
+newmtl airpods_max_silver_mic_mesh
+	Ns 35.714287
+	Ni 1.600000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.500000 0.500000 0.500000
+	Ks 0.017333 0.017333 0.017333
+	Ke 0.000000 0.000000 0.000000
+	map_Ka airpods_max_silver_03_diffuse.jpg
+	map_Kd airpods_max_silver_03_diffuse.jpg
+	map_bump airpods_max_silver_03_bump.jpg
+	bump airpods_max_silver_03_bump.jpg
+
+newmtl airpods_max_silver_sides
+	Ns 32.142857
+	Ni 1.600000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.309804 0.309804 0.309804
+	Ks 0.242118 0.242118 0.242118
+	Ke 0.000000 0.000000 0.000000
+
+newmtl airpods_max_silver_inside_white_plastic
+	Ns 42.857147
+	Ni 1.600000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.835294 0.835294 0.835294
+	Ks 0.129882 0.129882 0.129882
+	Ke 0.000000 0.000000 0.000000
+
+newmtl airpods_max_silver_black_plastic
+	Ns 35.714287
+	Ni 1.600000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.003922 0.003922 0.003922
+	Ks 0.026980 0.026980 0.026980
+	Ke 0.000000 0.000000 0.000000
+
+newmtl airpods_max_silver_top_white_mesh
+	Ns 28.571426
+	Ni 1.600000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.500000 0.500000 0.500000
+	Ks 0.025725 0.025725 0.025725
+	Ke 0.000000 0.000000 0.000000
+	map_Ka airpods_max_silver_06_diffuse.jpg
+	map_Kd airpods_max_silver_06_diffuse.jpg
+	map_d airpods_max_silver_06_opacity.jpg
+	map_bump airpods_max_silver_06_bump.jpg
+	bump airpods_max_silver_06_bump.jpg
+
+newmtl airpods_max_silver_chrome
+	Ns 70.357147
+	Ni 1.600000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.003922 0.003922 0.003922
+	Ks 0.831490 0.831490 0.831490
+	Ke 0.000000 0.000000 0.000000

@@ -1,0 +1,23 @@
+body {
+    background-color: #fff;
+}
+
+.botao {
+    padding: 20px;
+    width: 180px;
+    border-radius: 30px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    font-family: Helvetica, sans-serif;
+}
+
+.novo-botao {
+    padding: 30px;
+    width: 500px;
+    border-radius: 0px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}

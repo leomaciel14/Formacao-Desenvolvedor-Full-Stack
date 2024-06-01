@@ -1,63 +1,58 @@
-import * as THREE from './node_modules/three/build/three.module.js';
-import { OBJLoader } from './node_modules/three/examples/jsm/loaders/OBJLoader.js';
+window.addEventListener('DOMContentLoaded', function () {
+    // Seleciona o canvas
+    var canvas = document.getElementById('renderCanvas');
 
-const canvas = document.querySelector('#webgl-output');
+    // Cria o engine do Babylon.js
+    var engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
 
-if (!canvas) {
-    console.error('Canvas not found!');
-}
+    // Cria a cena
+    var createScene = function () {
+        var scene = new BABYLON.Scene(engine);
 
-// Cria a cena
-const scene = new THREE.Scene();
+        // Habilita a captura do canal alpha
+        engine.preserveDrawingBuffer = true;
 
-// Cria a câmera
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 5;
+        // Configura a cor do fundo da cena para transparente
+        scene.clearColor = new BABYLON.Color4(22, 22, 22, 0.5); // RGBA (R=0, G=0, B=0, A=0)
 
-// Cria o renderizador com fundo transparente
-const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x000000, 0);
+        // Adiciona uma câmera e a movimentação dela
+        var camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 2, 2, BABYLON.Vector3.Zero(), scene);
+        camera.attachControl(canvas, true);
 
-// Adiciona o renderizador ao documento
-document.body.appendChild(renderer.domElement);
+        // Adiciona uma luz
+        var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0), scene);
 
-// Carrega o modelo OBJ
-const loader = new OBJLoader();
+        // Carregar um modelo .obj
+        BABYLON.SceneLoader.ImportMesh("", "./_assets/fone_teste-2/", "cgaxis_airpods_max_silver_obj.obj", scene, function (meshes) {
+            // O modelo foi carregado
+            console.log("Modelo carregado!");
 
-loader.load(
-    './_assets/fone_3d.obj',
-    (object) => {
-        // Ajusta a escala e a posição do modelo
-        object.scale.set(0.1, 0.1, 0.1);
-        object.position.set(0, 0, 0);
+            // Posiciona o modelo
+            meshes[0].position = BABYLON.Vector3.Zero();
 
-        // Adiciona o modelo à cena
-        scene.add(object);
+            // Escala o modelo, se necessário
+            meshes[0].scaling = new BABYLON.Vector3(0.01, 0.01, 0.01);
 
-        console.log('Modelo carregado com sucesso');
-    },
-    (xhr) => {
-        console.log((xhr.loaded / xhr.total * 100) + '% carregado');
-    },
-    (error) => {
-        console.error('Ocorreu um erro ao carregar o modelo', error);
-    }
-);
+            // Rotaciona o modelo, se necessário
+            meshes[0].rotation = new BABYLON.Vector3(0, Math.PI, 0);
 
-// Função de renderização
-function animate() {
-    requestAnimationFrame(animate);
+            // Configura o material para suportar transparências, se necessário
+            meshes[0].material.alpha = 0.5; // Exemplo: torna o modelo 50% transparente
+        });
 
-    // Renderiza a cena
-    renderer.render(scene, camera);
-}
+        return scene;
+    };
 
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    // Cria a cena
+    var scene = createScene();
+
+    // Inicia o render loop
+    engine.runRenderLoop(function () {
+        scene.render();
+    });
+
+    // Ajusta o tamanho do canvas quando a janela é redimensionada
+    window.addEventListener('resize', function () {
+        engine.resize();
+    });
 });
-
-// Inicia a animação
-animate();

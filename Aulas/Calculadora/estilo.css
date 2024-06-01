@@ -1,0 +1,102 @@
+:root {
+    --cor-letra-tela: #19540a;
+    --cor-fundo-tela: #42C920;
+    --familia-font: "Jacquard 12", system-ui;
+}
+
+body {
+    background-color: black;
+    color: var(--cor-letra-tela);
+    font-family: var(--familia-font);
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.main {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+}
+
+.formulario {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 400px;
+}
+
+.botao {
+    width: 100px;
+    height: 100px;
+    margin: 3px;
+    background-color: #42C920;
+    color: black;
+    font-family: var(--familia-font);
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: normal;
+    border: none;
+}
+
+.botao:hover {
+    background-color: #2d9114;
+}
+
+.titulo {
+    font-family: var(--familia-font);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6rem;
+    margin: -1px;
+    padding: 30px;
+}
+
+.resultado-container {
+    position: relative;
+}
+
+.resultado {
+    margin-left: 3px;
+    max-width: 370px;
+    height: 100px;
+    background-color: var(--cor-fundo-tela);
+    color: var(--cor-letra-tela);
+    font-family: var(--familia-font);
+    font-size: 4rem;
+    font-weight: 400;
+    font-style: normal;
+    border: none;
+    text-align: right;
+    padding-right: 60px;
+    outline: none;
+    position: relative;
+    display: inline-block;
+}
+
+.resultado::placeholder {
+    font-size: 4rem;
+    color: var(--cor-letra-tela);
+}
+
+#cursor {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 4rem;
+    color: var(--cor-letra-tela);
+    animation: blink 1s step-end infinite;
+    pointer-events: none;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
