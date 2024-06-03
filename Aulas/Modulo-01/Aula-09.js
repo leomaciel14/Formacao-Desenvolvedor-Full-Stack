@@ -137,10 +137,10 @@ console.log(pessoa1.saudacao()); // Olá, meu nome é Alice, tenho 30 anos e mor
 console.log(pessoa2.saudacao()); // Olá, meu nome é Bob, tenho 25 anos e moro em Rio de Janeiro.
 
 
-
+/*
 const numeros = [10,30,50];
 let soma = 0;
-
+*/
 numeros.forEach((numeros) =>{ 
     console.log(numeros + " x 2 = " + (numeros*2))
     soma += numeros; 
