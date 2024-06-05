@@ -45,3 +45,14 @@ class Database {
         localStorage.setItem(id, JSON.stringfy(book))
     }
 }
+
+function getId(){
+    let id = localStorage.getItem('id');
+    if (id === null) {
+        id = 0;
+    } else {
+        id = parseInt(id) + 1;
+    }
+    localStorage.setItem('id', id);
+    return id;
+}
