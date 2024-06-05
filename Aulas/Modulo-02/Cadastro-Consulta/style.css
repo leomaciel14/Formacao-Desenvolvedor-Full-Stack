@@ -286,7 +286,6 @@ div#listOfAllBooks div {
     width: 200px;
     overflow-wrap: break-word;
     white-space: normal;
-    word-break: break-all;
 }
 
 i{
@@ -296,7 +295,7 @@ i{
 p#bookTitle {
     margin-top: 20px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 div#foundBooks img,
