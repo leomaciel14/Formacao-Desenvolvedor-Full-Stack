@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Biblioteca Virtual</title>
+    <meta name="description" content="Site de Biblioteca Virtual">
+    <meta name="author" content="Leonardo Boeira Maciel">
+    <meta name="keywords" content="biblioteca, virtual">
+    <link rel="icon" href="./_img/fav-icon.png" type="image/png">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div class="head">
-        <h1>Biblioteca Virtual</h1>
+        <img src="./_img/logo.png" alt="Logo Biblioteca Virtual" class="logo">
         <a class="botao_head" id="esta-aqui" href="index.html">Home</a>
         <a class="botao_head" href="consulta.html">Consultar Livros</a>
         <a class="botao_head" href="registrar.html">Registrar Livro</a>
@@ -17,8 +27,80 @@
     </div>
     <div class="container">
         <h1>Bem-vindo à Biblioteca</h1>
-        <a href="registrar.html">✏️ Registrar Livro</a>
-        <a href="consulta.html">📚 Consultar Livros</a>
+        <a href="registrar.html" class="botao_container">✏️ Registrar Livro</a>
+        <a href="consulta.html" class="botao_container">📚 Consultar Livros</a>
     </div>
+
+    <section class="container">
+        <div id="AllBooks">
+            <h1 id="titleAllBooks">Todos os Livros</h1>
+            <div id="listOfAllBooks">
+                <div class="bookCard">
+                    <p id="bookTitle">${bookName}</p>
+                    <img src="${bookCover}"/>
+                    <br><strong>Autor:</strong> ${bookaaaaaaaaaaaaaaaasssssssssAuthor}
+                    <i></i>
+                    <br><strong>Editora:</strong> ${bookPublisher}
+                    <i></i>
+                    <br><strong>Págs:</strong> ${numberOfPages}
+                    <i></i>
+                    <button id="btnRemove">Remover</button>
+                </div>
+
+                <div class="bookCard">
+                    <p id="bookTitle">${bookName}</p>
+                    <img src="${bookCover}"/>
+                    <br><strong>Autor:</strong> ${bookAuthor}
+                    <i></i>
+                    <br><strong>Editora:</strong> ${bookPublisher}
+                    <i></i>
+                    <br><strong>Págs:</strong> ${numberOfPages}
+                    <i></i>
+                    <button id="btnRemove">Remover</button>
+                </div>
+
+                <div class="bookCard">
+                    <p id="bookTitle">${bookName}</p>
+                    <img src="${bookCover}"/>
+                    <br><strong>Autor:</strong> ${bookAuthor}
+                    <i></i>
+                    <br><strong>Editora:</strong> ${bookPublisher}
+                    <i></i>
+                    <br><strong>Págs:</strong> ${numberOfPages}
+                    <i></i>
+                    <button id="btnRemove">Remover</button>
+                </div>
+
+                <div class="bookCard">
+                    <p id="bookTitle">${bookName}</p>
+                    <img src="${bookCover}"/>
+                    <br><strong>Autor:</strong> ${bookAuthor}
+                    <i></i>
+                    <br><strong>Editora:</strong> ${bookPublisher}
+                    <i></i>
+                    <br><strong>Págs:</strong> ${numberOfPages}
+                    <i></i>
+                    <button id="btnRemove">Remover</button>
+                </div>
+
+                <div class="bookCard">
+                    <p id="bookTitle">${bookName}</p>
+                    <img src="${bookCover}"/>
+                    <br><strong>Autor:</strong> ${bookAuthor}
+                    <i></i>
+                    <br><strong>Editora:</strong> ${bookPublisher}
+                    <i></i>
+                    <br><strong>Págs:</strong> ${numberOfPages}
+                    <i></i>
+                    <button id="btnRemove">Remover</button>
+                </div>
+
+                <p id="emptyBookList">Nenhum livro cadastrado</p>
+            </div>
+        </div>
+    </section>
+    <script src="https://kit.fontawesome.com/16ea865109.js" crossorigin="anonymous"></script>
+    <script src="filtro.js"></script>
 </body>
+
 </html>

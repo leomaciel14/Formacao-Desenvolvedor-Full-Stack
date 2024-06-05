@@ -1,18 +1,116 @@
+:root {
+    --primary-color: #086997;
+    --secondary-color: #0881b9;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: rgb(214, 208, 235);
+    --dark-color: #343a40;
+    --white-color: #fff;
+    --black-color: #000;
+    --gray-color: #cbced1;
+    --gray-dark-color: #343a40;
+    --gradiente: linear-gradient(45deg, #086997, #0881b9);
+}
+
 body {
-    font-family: 'Raleway', sans-serif;
-    background-color: #f4f4f4;
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--gray-color);
     margin: 0;
     padding: 0;
 }
 
+.botao_head {
+    background-color: #0057b300;
+    display: block;
+    margin: 10px 0;
+    padding: 15px;
+    text-decoration: none;
+    text-align: center;
+    color: var(--light-color);
+    border-radius: 5px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.botao_head:hover {
+    color: var(--white-color);
+    background-color: #0057b300;
+}
+
+#esta-aqui {
+    font-weight: 600;
+    color: var(--white-color);
+}
+
+a {
+    display: block;
+    margin: 10px 10px;
+    padding: 15px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.botao_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    width: 300px;
+}
+
+.head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    background: var(--gradiente);
+    color: var(--dark-color);
+    text-transform: uppercase;
+}
+
+a:hover {
+    background-color: var(--secondary-color);
+}
+
+.logo {
+    max-height: 40px;
+    height: auto;
+}
+
 .container {
+    display: flex;
     text-align: center;
     align-items: center;
-    max-width: 600px;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 85%;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+
+.container-min {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 350px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: var(--white-color);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
 }
 
 .login-container {
@@ -30,11 +128,12 @@ body {
     text-align: center;
 }
 
-#username{
+#username {
     margin-right: 10px;
 }
 
 h1 {
+padding: 20px;
     margin-bottom: 20px;
 }
 
@@ -74,22 +173,6 @@ button:hover {
     background-color: #4cae4c;
 }
 
-a {
-    display: block;
-    margin: 10px 0;
-    padding: 15px;
-    text-decoration: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-
-a:hover {
-    background-color: #0056b3;
-}
-
 .filter-form,
 .results {
     display: flex;
@@ -102,65 +185,34 @@ a:hover {
     border-bottom: 1px solid #ccc;
 }
 
-.head{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
-    background-color: #0056b3;
-    color: #fff;
-}
-
-.botao_head{
-    display: block;
-    margin: 10px 0;
-    padding: 15px;
-    text-decoration: none;
-    text-align: center;
-    background-color: #0056b3;
-    color: white;
-    border-radius: 5px;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-
-.botao_head:hover {
-    background-color: #034790;
-}
-
-#esta-aqui {
-    background-color: #033871;
-    font-weight: 900;
-}
-
 .modal {
-    display: none; /* Escondido por padrão */
-    position: fixed; /* Fica em cima da página */
-    z-index: 1; /* Fica na frente */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Ativa o scroll se necessário */
-    background-color: rgb(0,0,0); /* Cor de fundo */
-    background-color: rgba(0,0,0,0.4); /* Cor de fundo com opacidade */
+    overflow: none;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% do topo e centralizado */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Pode ser ajustado */
-    max-width: 300px; /* Pode ser ajustado */
+    width: 80%;
+    max-width: 400px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .close {
-    color: #aaa;
+    color: var(--gray-color);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -168,21 +220,132 @@ a:hover {
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: var(--black-color);
     text-decoration: none;
     cursor: pointer;
 }
 
 #confirmButton {
-    margin-top: 20px;
+    margin-top: 8px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 #confirmButton:hover {
-    background-color: #0056b3;
+    background-color: var(--secondary-color);
+}
+
+
+
+
+
+
+
+
+div#listOfBooksSearch {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div#listOfAllBooks p#emptyBookList {
+    display: block;
+    text-align: center;
+    grid-column: 1 / 5;
+}
+
+div#foundBooks,
+div#listOfAllBooks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+    margin: 10px;
+}
+
+div#foundBooks div,
+div#listOfAllBooks div {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white-color);
+    text-align: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+    color: var(--dark-color);
+    max-width: 300px;
+    width: 200px;
+    overflow-wrap: break-word;
+    white-space: normal;
+    word-break: break-all;
+}
+
+i{
+    margin: -2px;
+}
+
+p#bookTitle {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+div#foundBooks img,
+div#listOfAllBooks img {
+    height: 130px;
+    width: 90px;
+    padding: 10px;
+    margin: 5px auto;
+}
+
+button#btnSearch::before {
+    content: '\f002';
+    color: white;
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 15px;
+    right: 3px;
+}
+
+button#btnSinopsys {
+    background-color: rgb(2, 87, 136);
+}
+
+button#btnSinopsys:hover {
+    background-color: rgb(0, 118, 187);
+}
+
+button#btnSinopsys::before {
+    content: '\f02d';
+    color: white;
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 16px;
+    right: 5px;
+}
+
+button#btnRemove {
+    background-color: var(--danger-color);
+}
+
+button#btnRemove:hover {
+    background-color: rgb(199, 1, 1);
+}
+
+button#btnRemove::before {
+    content: '\f1f8';
+    color: white;
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 16px;
+    right: 5px;
 }
