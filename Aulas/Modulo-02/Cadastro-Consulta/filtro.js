@@ -1,173 +1,95 @@
-/* let allBooks = []
-const emptyBookList = document.querySelector("#emptyBookList")
-const fields = document.querySelectorAll("input")
-const modal = document.querySelector("#myModal")
-const modalTitle = document.querySelector("#modalTitle")
-const synopsis = document.querySelector("#synopsis")
-const txtSynopsis = document.querySelector("#txtSynopsis")
-const btnRegister = document.querySelector("#btnRegister")
-const btnSearch = document.querySelector("#btnSearch")
+        document.addEventListener('DOMContentLoaded', function () {
+            const resultsContainer = document.getElementById('results');
+            const searchTituloInput = document.getElementById('search-titulo');
+            const filterAnoInput = document.getElementById('filter-ano');
+            const filterAutorInput = document.getElementById('filter-autor');
+            const filterEditoraInput = document.getElementById('filter-editora');
+            const filterButton = document.getElementById('filter-button');
+            const maxColumns = 6; // Máximo de colunas no grid
 
-function findBook() {
-    return allBooks.findIndex((elem) => elem.bookName === (event.target.parentNode.className))
-}
+            filterButton.addEventListener('click', filterBooks);
 
-function showError(bookName) {
-    const contentModel = document.querySelector("#contentModel")
-    modalTitle.innerHTML = `Livro "${bookName}" não encontrado!`
-    txtSynopsis.innerHTML = ""
-    contentModel.style.width = "50%"
-    modal.style.display = "block"
-}
+            // Função para filtrar os livros
+            function filterBooks() {
+                const searchTitulo = searchTituloInput.value.trim().toLowerCase();
+                const filterAno = filterAnoInput.value.trim();
+                const filterAutor = filterAutorInput.value.trim().toLowerCase();
+                const filterEditora = filterEditoraInput.value.trim().toLowerCase();
 
-function closeModal(event) {
-    modal.style.display = "none"
-}
+                // Carrega os livros do localStorage
+                let books = JSON.parse(localStorage.getItem('books')) || [];
 
-function closeModalWindow(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-}
+                // Filtra os livros com base nos critérios
+                let filteredBooks = books.filter(book => {
+                    const matchTitulo = searchTitulo === '' || book.titulo.toLowerCase().includes(searchTitulo);
+                    const matchAno = filterAno === '' || book.ano.toString() === filterAno;
+                    const matchAutor = filterAutor === '' || book.autor.toLowerCase().includes(filterAutor);
+                    const matchEditora = filterEditora === '' || book.editora.toLowerCase().includes(filterEditora);
 
-function clearFields() {
-    fields.forEach(function (elem) {
-        elem.value = ""
-    })
-    synopsis.value = ""
-}
+                    return matchTitulo && matchAno && matchAutor && matchEditora;
+                });
 
-function createCard(bookCard, bookName, bookAuthor, bookPublisher, numberOfPages, bookCover) {
-    bookCard.className = bookName
-    bookCard.innerHTML = `
-    <p id="bookTitle">${bookName}</p>
-    <img src="${bookCover}"/>
-    Autor: ${bookAuthor}
-    <br>Editora: ${bookPublisher}
-    <br>Págs: ${numberOfPages}
-    <button id="btnSinopsys">Sinopse</button>
-    <button id="btnRemove">Remover</button>
-    `
-}
-
-function appendElements(divSelect, bookCard) {
-    const btnCloseModal = document.querySelector("#btnCloseModal")
-    divSelect.append(bookCard)
-    divSelect.addEventListener("click", showSynopsis)
-    btnCloseModal.addEventListener("click", closeModal)
-    window.addEventListener("click", closeModalWindow)
-}
-
-function removeCard(parentDiv) {
-    return function remove(event) {
-        if (event.target.id === "btnRemove") {
-            parentDiv.removeChild(event.target.parentNode)
-            if (allBooks.splice(findBook(), 1)) {
-                alert(`Livro "${event.target.parentNode.className}" removido com sucesso!`)
+                // Atualiza a lista de resultados na página
+                displayResults(filteredBooks);
             }
-        }
-    }
-}
 
-function registerBook() {
-    const listOfAllBooks = document.querySelector("#listOfAllBooks")
-    const bookName = document.querySelector("#bookName").value
-    const bookAuthor = document.querySelector("#bookAuthor").value
-    const bookPublisher = document.querySelector("#bookPublisher").value
-    const numberOfPages = Number(document.querySelector("#numberOfPages").value)
-    const bookCover = document.querySelector("#bookCover").value
+            // Função para exibir os resultados na página
+            function displayResults(books) {
+                resultsContainer.innerHTML = '';
 
-    event.preventDefault()
+                if (books.length === 0) {
+                    const noResultsMessage = document.createElement('p');
+                    noResultsMessage.textContent = 'Nenhum livro encontrado com os filtros selecionados.';
+                    resultsContainer.appendChild(noResultsMessage);
+                } else {
+                    books.forEach(book => {
+                        const bookCard = document.createElement('div');
+                        bookCard.classList.add('bookCard');
 
-    allBooks.push(
-        {
-            bookName,
-            bookAuthor,
-            bookPublisher,
-            numberOfPages,
-            bookCover,
-            synopsis: synopsis.value
-        })
+                        const bookTitle = document.createElement('p');
+                        bookTitle.id = 'bookTitle';
+                        bookTitle.textContent = book.titulo;
+                        bookCard.appendChild(bookTitle);
 
-    emptyBookList.remove()
-    const bookCard = document.createElement("div")
+                        const bookAuthor = document.createElement('p');
+                        const strongAuthor = document.createElement('strong');
+                        strongAuthor.textContent = `Autor: `;
+                        bookAuthor.appendChild(strongAuthor);
+                        bookAuthor.appendChild(document.createTextNode(book.autor));
+                        bookCard.appendChild(bookAuthor);
 
-    createCard(bookCard, bookName, bookAuthor, bookPublisher, numberOfPages, bookCover)
-    appendElements(listOfAllBooks, bookCard)
+                        const bookImg = document.createElement('img');
+                        bookImg.src = `${book.imagem}`;
+                        bookCard.appendChild(bookImg);
 
-    const remove = removeCard(listOfAllBooks)
-    listOfAllBooks.addEventListener("click", remove)
+                        const bookEditora = document.createElement('p');
+                        const strongEditora = document.createElement('strong');
+                        strongEditora.textContent = `Editora: `;
+                        bookEditora.appendChild(strongEditora);
+                        bookEditora.appendChild(document.createTextNode(book.editora));
+                        bookCard.appendChild(bookEditora);
 
-    clearFields()
-}
+                        const bookPages = document.createElement('p');
+                        const strongPages = document.createElement('strong');
+                        strongPages.textContent = `Páginas: `;
+                        bookPages.appendChild(strongPages);
+                        bookPages.appendChild(document.createTextNode(book.paginas));
+                        bookCard.appendChild(bookPages);
 
-function searchBook() {
-    const bookNameSearch = document.querySelector("#bookNameSearch").value
-    const listOfBooksSearch = document.querySelector("#listOfBooksSearch")
-    const foundBooks = document.querySelector("#foundBooks")
-    const bookCard = document.createElement("div")
+                        resultsContainer.appendChild(bookCard);
+                    });
+                }
 
-    foundBooks.innerHTML = ""
-    listOfBooksSearch.append(foundBooks)
+                // Atualiza o grid de acordo com o número de resultados
+                updateGrid();
+            }
 
-    const findBook = allBooks.filter(elem => elem.bookName === bookNameSearch)
+            // Função para atualizar o grid de resultados
+            function updateGrid() {
+                const numColumns = Math.min(maxColumns, resultsContainer.children.length);
+                resultsContainer.style.gridTemplateColumns = `repeat(${numColumns}, 1fr)`;
+            }
 
-    if (findBook.length !== 0) {
-        findBook.forEach(elem => {
-            createCard(bookCard, elem.bookName, elem.bookAuthor, elem.bookPublisher, elem.numberOfPages, elem.bookCover)
-            appendElements(foundBooks, bookCard)
-        })
-    } else {
-        showError(bookNameSearch)
-    }
-
-    const remove = removeCard(foundBooks)
-    listOfBooksSearch.addEventListener("click", remove)
-
-    clearFields()
-}
-
-btnRegister.addEventListener("click", registerBook)
-btnSearch.addEventListener("click", searchBook)
-
-*/
-
-function filterBooks() {
-    const results = document.getElementById('results');
-    results.innerHTML = '';
-
-    const books = [
-        { titulo: 'Livro A', ano: 2020, autor: 'Autor A', editora: 'Editora A' },
-        { titulo: 'Livro B', ano: 2019, autor: 'Autor B', editora: 'Editora B' },
-    ];
-
-    const searchTitulo = document.getElementById('search-titulo').value.toLowerCase();
-    const filterAno = document.getElementById('filter-ano').value;
-    const filterAutor = document.getElementById('filter-autor').value.toLowerCase();
-    const filterEditora = document.getElementById('filter-editora').value.toLowerCase();
-
-    const filteredBooks = books.filter(book => {
-        return (searchTitulo === '' || book.titulo.toLowerCase().includes(searchTitulo)) &&
-            (filterAno === '' || book.ano == filterAno) &&
-            (filterAutor === '' || book.autor.toLowerCase().includes(filterAutor)) &&
-            (filterEditora === '' || book.editora.toLowerCase().includes(filterEditora));
-    });
-
-    filteredBooks.forEach(book => {
-        const bookItem = document.createElement('div');
-        bookItem.className = 'book-item';
-        bookItem.textContent = `Título: ${book.titulo}, Ano: ${book.ano}, Autor: ${book.autor}, Editora: ${book.editora}`;
-        results.appendChild(bookItem);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Substitua este exemplo com a lógica para buscar dados reais
-    const params = new URLSearchParams(window.location.search);
-    document.getElementById('titulo').textContent = params.get('titulo');
-    document.getElementById('autor').textContent = params.get('autor');
-    document.getElementById('editora').textContent = params.get('editora');
-    document.getElementById('ano').textContent = params.get('ano');
-    document.getElementById('genero').textContent = params.get('genero');
-    document.getElementById('estado').textContent = params.get('estado');
-});
+            // Carrega os livros ao carregar a página
+            filterBooks();
+        });

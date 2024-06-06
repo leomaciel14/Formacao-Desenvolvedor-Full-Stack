@@ -19,26 +19,51 @@
 <body>
     <div class="head">
         <img src="./_img/logo.png" alt="Logo Biblioteca Virtual" class="logo">
-        <a class="botao_head" id="esta-aqui" href="index.html">Home</a>
+        <a class="botao_head" href="index.html">Home</a>
         <a class="botao_head" href="consulta.html">Consultar Livros</a>
         <a class="botao_head" href="registrar.html">Registrar Livro</a>
         <a class="botao_head" href="login.html">Login</a>
         <a class="botao_head" href="logout.html">Logout</a>
     </div>
 
-    <div class="container-min">
+    <div class="container-submit">
         <h2>Livro Registrado com Sucesso!</h2>
-        <div class="result">
-            <p><strong>Título:</strong> <span id="titulo"></span></p>
-            <p><strong>Autor:</strong> <span id="autor"></span></p>
-            <p><strong>Editora:</strong> <span id="editora"></span></p>
-            <p><strong>Ano de Lançamento:</strong> <span id="ano"></span></p>
-            <p><strong>Gênero:</strong> <span id="genero"></span></p>
-            <p><strong>Estado de Conservação:</strong> <span id="estado"></span></p>
+        <div class="submit">
+            <div class="submit-img">
+                <span class="bookImg" id="imagem"></span>
+            </div>
+            <div class="submit-content">
+                <p><strong>Título:</strong> <span id="titulo"></span></p>
+                <p><strong>Autor:</strong> <span id="autor"></span></p>
+                <p><strong>Editora:</strong> <span id="editora"></span></p>
+                <p><strong>Ano de Lançamento:</strong> <span id="ano"></span></p>
+                <p><strong>Gênero:</strong> <span id="genero"></span></p>
+            </div>
         </div>
         <a class="botao_container" href="registrar.html">Registrar outro livro</a>
     </div>
 
-    <script src="filtro.js"></script>
+    <script src="registro.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const livrosRegistrados = JSON.parse(localStorage.getItem('books'));
+
+            if (livrosRegistrados && livrosRegistrados.length > 0) {
+                const livroRegistrado = livrosRegistrados[livrosRegistrados.length - 1];
+
+                document.getElementById('titulo').textContent = livroRegistrado.titulo;
+                document.getElementById('autor').textContent = livroRegistrado.autor;
+                document.getElementById('editora').textContent = livroRegistrado.editora;
+                document.getElementById('ano').textContent = livroRegistrado.ano;
+                document.getElementById('genero').textContent = livroRegistrado.genero;
+                const imagem = document.createElement('img');
+                imagem.src = livroRegistrado.imagem;
+                imagem.alt = livroRegistrado.titulo;
+                document.getElementById('imagem').appendChild(imagem);
+            }
+        });
+    </script>
 </body>
+
 </html>

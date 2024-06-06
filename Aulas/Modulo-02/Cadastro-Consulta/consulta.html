@@ -25,9 +25,11 @@
         <a class="botao_head" href="login.html">Login</a>
         <a class="botao_head" href="logout.html">Logout</a>
     </div>
-
-    <div class="container-min">
+    
+    <div class="text-consulta">
         <h2>Consulta de Livros</h2>
+    </div>
+    <div class="container-consulta">
         <div class="filter-form">
             <label for="search-titulo">Pesquisar por Título</label>
             <input type="text" id="search-titulo" name="search-titulo">
@@ -41,13 +43,12 @@
             <label for="filter-editora">Filtrar por Editora</label>
             <input type="text" id="filter-editora" name="filter-editora">
 
-            <button onclick="filterBooks()">Filtrar</button>
+            <button id="filter-button">Filtrar</button>
         </div>
         <div class="results" id="results">
         </div>
     </div>
-
-    <script src="script-1.js"></script>
+    <script src="filtro.js"></script>
 </body>
 
 </html>
