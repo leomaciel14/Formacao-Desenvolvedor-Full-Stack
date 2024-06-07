@@ -5,15 +5,15 @@ document.addEventListener('DOMContentLoaded', function () {
         let quantidadeLivros = books.length;
         const maxColumns = 6;
         let columns = '';
-    
+
         if (quantidadeLivros <= maxColumns) {
             columns = `repeat(${quantidadeLivros}, 1fr)`;
         } else {
             columns = `repeat(${maxColumns}, 1fr)`;
         }
-    
+
         listContainer.style.gridTemplateColumns = columns;
-    });    
+    });
 
     // Observa mudanças no tamanho do container
     observer.observe(listContainer);
@@ -66,19 +66,47 @@ document.addEventListener('DOMContentLoaded', function () {
                 btnRemove.id = 'btnRemove';
                 btnRemove.textContent = 'Remover';
                 btnRemove.addEventListener('click', () => {
-                    const confirmRemove = confirm('Você realmente quer remover este livro?');
-                    if (confirmRemove) {
+                    showModalConfirm(() => {
                         books.splice(index, 1);
                         localStorage.setItem('books', JSON.stringify(books));
                         updateBookList(books);
-                        location.reload();
-                    }
+                    });
                 });
                 bookCard.appendChild(btnRemove);
 
                 listContainer.appendChild(bookCard);
             });
         }
+    }
+
+    // Função para exibir o modal de confirmação
+    function showModalConfirm(callback) {
+        const modal = document.getElementById("confirmationModal");
+        modal.style.display = "block";
+
+        const confirmButton = document.getElementById("confirmButton");
+        const cancelButton = document.getElementById("cancelButton");
+        const closeButton = document.querySelector(".close");
+
+        confirmButton.addEventListener("click", function() {
+            modal.style.display = "none";
+            callback();
+        });
+
+        cancelButton.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+
+        closeButton.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+
+        // Adiciona um manipulador para fechar o modal ao clicar fora dele
+        window.addEventListener("click", function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
     }
 
     // Carrega os livros do localStorage

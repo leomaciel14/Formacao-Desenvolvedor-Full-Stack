@@ -2,21 +2,43 @@
     --primary-color: #086997;
     --secondary-color: #0881b9;
     --success-color: #28a745;
+    --success-color-1: #21cf49;
     --info-color: #17a2b8;
     --warning-color: #ffc107;
     --danger-color: #dc3545;
     --light-color: rgb(214, 208, 235);
     --dark-color: #343a40;
-    --white-color: #fff;
+    --white-color: #f3f3f3;
+    --white-color-1: #e9e9e9;
+    --white-color-2: #f1f1f1;
     --black-color: #000;
     --gray-color: #cbced1;
-    --gray-dark-color: #343a40;
     --gradiente: linear-gradient(45deg, #086997, #0881b9);
+    --cor-texto-botão: #ffffff;
 }
-
+/*
+:root {
+    --primary-color: #1086bd;
+    --secondary-color: #0d5678;
+    --success-color-1: #21cf49;
+    --success-color: #38a338;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: rgb(214, 208, 235);
+    --dark-color: #343a40;
+    --white-color: #222;
+    --white-color-1: #111;
+    --white-color-2: #333;
+    --black-color: #fff;
+    --gray-color: #cbced1;
+    --gradiente: linear-gradient(45deg, #086997, #0881b9);
+    --cor-texto-botão: #fff;
+}
+*/
 body {
     font-family: "Montserrat", sans-serif;
-    background-color: var(--white-color);
+    background-color: var(--white-color-1);
     margin: 0;
     padding: 0;
 }
@@ -36,12 +58,11 @@ body {
 
 .botao_head:hover {
     color: var(--white-color);
-    background-color: #0057b300;
 }
 
 #esta-aqui {
     font-weight: 600;
-    color: var(--white-color);
+    color: var(--cor-texto-botão);
 }
 
 a {
@@ -54,12 +75,16 @@ a {
     transition: background-color 0.3s ease;
 }
 
+a:hover {
+    background-color: var(--secondary-color);
+}
+
 .botao_container {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--primary-color);
-    color: var(--white-color);
+    color: var(--cor-texto-botão);
     width: 300px;
 }
 
@@ -68,15 +93,10 @@ a {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding: 0 50px;
     background: var(--gradiente);
     color: var(--dark-color);
     text-transform: uppercase;
-}
-
-a:hover {
-    background-color: var(--secondary-color);
 }
 
 .logo {
@@ -84,39 +104,16 @@ a:hover {
     height: auto;
 }
 
-.container {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    max-width: 85%;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-}
-
+.container,
+.container-min,
+.container-consulta,
+.container-submit,
 .container-AllBooks {
     display: flex;
+    flex-direction: column;
     text-align: center;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    max-width: 85%;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: none;
-}
-
-.container-min {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    max-width: 350px;
     margin: 50px auto;
     padding: 20px;
     background-color: var(--white-color);
@@ -124,34 +121,51 @@ a:hover {
     border-radius: 20px;
 }
 
+.container,
+.container-AllBooks {
+    max-width: 85%;
+}
+
+.container-min {
+    max-width: 350px;
+}
+
+.container-consulta {
+    max-width: 75%;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.container-submit {
+    max-width: 650px;
+}
+
 .login-container {
     text-align: center;
     align-items: center;
-    max-width: 600px;
     margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
     padding: 40px;
+    background-color: var(--white-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     width: 100%;
     max-width: 400px;
-    text-align: center;
 }
-
-
 
 #username {
     margin-right: 10px;
 }
 
 h1 {
-padding: 20px;
+    padding: 20px;
     margin-bottom: 20px;
+    color: var(--black-color);
 }
 
 h2 {
     text-align: center;
+    color: var(--black-color);
 }
 
 form {
@@ -176,36 +190,66 @@ button {
     margin-top: 20px;
     border: none;
     border-radius: 5px;
-    background-color: #5cb85c;
+    background-color: var(--success-color);
     color: white;
     font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-button{
+    padding: 10px;
+    margin-top: 4px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--success-color);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #4cae4c;
+    background-color: var(--success-color-1);
 }
 
-.container-consulta {
+.filter-container{
     display: flex;
-    flex-direction: column;
-    text-align: center;
     align-items: center;
-    max-width: 75%;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    padding: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    color: var(--black-color);
+}
+
+.filter-container input{
+    color: var(--black-color);
 }
 
 .filter-form {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    font-weight: bold;
+}
+
+.filter-form input {
+    background-color: var(--white-color-1);
+    display: inline-flex;
+    margin: 0px 40px;
+
+}
+.filter-form label {
+    display: inline-flex;
+    margin-right: -30px;
+    color: var(--black-color);
+}
+
+
+.filter-pesquisa input{
+    background-color: var(--white-color-1);
+    width: 920px;
 }
 
 .results {
@@ -214,32 +258,19 @@ button:hover {
     gap: 20px;
     margin: 50px auto;
     padding: 20px;
+    color: var(--black-color);
 }
 
-.text-consulta{
+.text-consulta {
     margin: 50px auto;
 }
 
-.container-submit {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    max-width: 650px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: var(--white-color);
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-}
-
-.submit{
+.submit {
     display: flex;
     flex-direction: row;
 }
 
-.submit-content{
+.submit-content {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -251,6 +282,7 @@ button:hover {
     overflow-wrap: break-word;
     white-space: normal;
     max-width: 230px;
+    color: var(--black-color);
 }
 
 .book-item {
@@ -274,8 +306,6 @@ button:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: none;
-    background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -288,8 +318,16 @@ button:hover {
     max-width: 400px;
     text-align: center;
     border-radius: 20px;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 600;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
 }
 
 .close {
@@ -297,16 +335,16 @@ button:hover {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
     color: var(--black-color);
     text-decoration: none;
-    cursor: pointer;
 }
 
-#confirmButton {
+#confirmButton, #cancelButton{
     margin-top: 8px;
     padding: 10px;
     background-color: var(--primary-color);
@@ -314,8 +352,8 @@ button:hover {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 #confirmButton:hover {
@@ -329,45 +367,37 @@ div#listOfBooksSearch {
     align-items: center;
 }
 
-div#listOfAllBooks p#emptyBookList {
-    display: block;
-    text-align: center;
-    grid-column: 1 / 5;
-}
-
-#foundBooks,
-#listOfAllBooks {
-    display: grid;
-    grid-gap: 20px;
-    margin: 10px;
-}
-
-
 .bookCard {
-    border: 1px solid #ccc;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     text-align: center;
+    border: 1px solid #ccc;
+    padding: 25px;
     border-radius: 8px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-    color: var(--dark-color);
-    max-width: 300px;
+    background-color: var(--white-color-2);
+    max-width: 350px;
+
 }
 
 .bookCard img {
-    height: 130px;
-    width: 90px;
-    padding: 10px;
+    height: 200px;
+    width: 140px;
+    padding: 5px;
     margin: 5px auto;
 }
 
 .bookCard p#bookTitle {
-    margin-top: 20px;
+    margin-top: 15px;
     font-weight: bold;
     font-size: 16px;
+    color: var(--black-color);
+}
+
+.bookCard p {
+    color: var(--black-color);
 }
 
 .bookCard button#btnRemove {
@@ -379,6 +409,7 @@ div#listOfAllBooks p#emptyBookList {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 10px;
 }
 
 .bookCard button#btnRemove:hover {
@@ -394,48 +425,11 @@ div#listOfAllBooks p#emptyBookList {
     margin-right: 5px;
 }
 
-div#foundBooks div,
-div#listOfAllBooks div {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--white-color);
-    text-align: center;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: 500;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-    color: var(--dark-color);
-    max-width: 300px;
-    width: 200px;
-    overflow-wrap: break-word;
-    white-space: normal;
-}
-
-i{
-    margin: -2px;
-}
-
-p#bookTitle {
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-div#foundBooks img,
-div#listOfAllBooks img {
-    height: 130px;
-    width: 90px;
-    padding: 10px;
-    margin: 5px auto;
-}
-
-button#btnRemove {
+button#btnRemove, button#cancelButton {
     background-color: var(--danger-color);
 }
 
-button#btnRemove:hover {
+button#btnRemove:hover, button#cancelButton:hover {
     background-color: rgb(199, 1, 1);
 }
 
@@ -446,4 +440,67 @@ button#btnRemove::before {
     font-family: FontAwesome;
     font-size: 16px;
     right: 5px;
+}
+
+i {
+    margin: -2px;
+}
+
+p#bookTitle {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+div#listOfAllBooks p#emptyBookList {
+    display: block;
+    text-align: center;
+    grid-column: 1 / 5;
+
+}
+
+#foundBooks,
+#listOfAllBooks {
+    display: grid;
+    grid-gap: 20px;
+    margin: 10px;
+}
+
+div#foundBooks div,
+div#listOfAllBooks div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+    color: var(--dark-color);
+    max-width: 235px;
+    width: 240px;
+    overflow-wrap: break-word;
+    white-space: normal;
+    background-color: var(--white-color-2);
+}
+
+div#foundBooks img,
+div#listOfAllBooks img {
+    height: 200px;
+    width: 140px;
+    margin: 5px auto;
+}
+
+#book-form label, .form-group label {
+    color: var(--black-color);
+}
+
+#book-form input, .form-group  input {
+    background-color: var(--white-color-1);
+    color: var(--black-color);
+}
+
+#book-form input#imagem {
+    color: var(--black-color);
 }

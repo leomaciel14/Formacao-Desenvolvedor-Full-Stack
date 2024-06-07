@@ -22,21 +22,26 @@ class Registro {
 
 class Database {
     createBook(book) {
-        const id = getId();
-        localStorage.setItem(id, JSON.stringify(book));
-        localStorage.setItem('id', id);
+        // Pega o array de livros do localStorage ou inicializa um array vazio
+        let books = JSON.parse(localStorage.getItem('books')) || [];
+        
+        // Adiciona o novo livro ao array
+        books.push(book);
+        
+        // Armazena o array atualizado no localStorage
+        localStorage.setItem('books', JSON.stringify(books));
     }
-}
 
-function getId() {
-    let id = localStorage.getItem('id');
-    if (id === null) {
-        id = 0;
-    } else {
-        id = parseInt(id) + 1;
+    getId() {
+        let id = localStorage.getItem('id');
+        if (id === null) {
+            id = 0;
+        } else {
+            id = parseInt(id) + 1;
+        }
+        localStorage.setItem('id', id); // Atualiza o ID no localStorage
+        return id;
     }
-    localStorage.setItem('id', id);
-    return id;
 }
 
 function displayBookDetails(book) {
@@ -46,11 +51,9 @@ function displayBookDetails(book) {
     document.getElementById('ano').textContent = book.ano;
     document.getElementById('genero').textContent = book.genero;
     document.getElementById('paginas').textContent = book.paginas;
-
     const imagem = document.getElementById('imagem');
     imagem.src = book.imagem;
 }
-
 function registerBook() {
     const titulo = document.getElementById('titulo').value;
     const autor = document.getElementById('autor').value;
@@ -70,13 +73,36 @@ function registerBook() {
             database.createBook(book);
             displayBookDetails(book);
 
-            let books = JSON.parse(localStorage.getItem('books')) || [];
-            books.push(book);
-            localStorage.setItem('books', JSON.stringify(books));
-
-            alert('Livro cadastrado com sucesso!');
-            window.location.href = 'submit.html';
+            showModal(); // Chama a função para mostrar o modal em vez do alerta
         }
     };
     reader.readAsDataURL(imagemInput);
 }
+
+// Função para exibir o modal
+function showModal() {
+    const modal = document.getElementById("confirmationModal");
+    modal.style.display = "block";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const confirmButton = document.getElementById("confirmButton");
+    const closeButton = document.querySelector(".close");
+    const modal = document.getElementById("confirmationModal");
+
+    confirmButton.addEventListener("click", function() {
+        modal.style.display = "none";
+        window.location.href = 'submit.html';
+    });
+
+    closeButton.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+
+    // Adiciona um manipulador para fechar o modal ao clicar fora dele
+    window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
+});
