@@ -60,6 +60,24 @@ body {
     color: var(--white-color);
 }
 
+#toggleThemeButton {
+    background-color: #0057b300;
+    display: block;
+    margin: 10px 0;
+    padding: 15px;
+    text-decoration: none;
+    text-align: center;
+    color: var(--light-color);
+    border-radius: 5px;
+    font-size: 18px;
+    transition: 1s ease;
+}
+
+#toggleThemeButton:hover {
+    color: var(--black-color);
+    background-color: var(--info-color);
+}
+
 #esta-aqui {
     font-weight: 600;
     color: var(--cor-texto-botão);
