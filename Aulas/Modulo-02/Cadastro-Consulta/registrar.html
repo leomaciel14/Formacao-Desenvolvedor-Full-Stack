@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca Virtual</title>
-    <meta name="description" content="Site de Biblioteca Virtual">
+    <title>Floreios & Borrões</title>
+    <meta name="description" content="Site de Biblioteca Virtual Floreios & Borrões">
     <meta name="author" content="Leonardo Boeira Maciel">
     <meta name="keywords" content="biblioteca, virtual">
     <link rel="icon" href="./_img/fav-icon.png" type="image/png">
@@ -23,33 +23,41 @@
         <a class="botao_head" href="consulta.html">Consultar Livros</a>
         <a class="botao_head" id="esta-aqui" href="registrar.html">Registrar Livro</a>
         <a class="botao_head" href="login.html">Login</a>
-        <a class="botao_head" href="logout.html">Logout</a>
         <button id="toggleThemeButton" class="botao_head"></button>
     </div>
 
-    <div class="container-min">
+    <div class="container-form">
         <h2>Registrar Livro</h2>
         <form id="book-form" onsubmit="registerBook(); return false;">
-            <label for="titulo">Título</label>
-            <input type="text" id="titulo" name="titulo" required>
+            <div class="book-form-container">
 
-            <label for="autor">Autor</label>
-            <input type="text" id="autor" name="autor" required>
+                <div class="submit-img">
+                    <img src="./_img/placeholder.jpg" id="img-preview" alt="Preview da Imagem" style="cursor: pointer;">
+                </div>
 
-            <label for="editora">Editora</label>
-            <input type="text" id="editora" name="editora" required>
-
-            <label for="ano">Ano de Lançamento</label>
-            <input type="number" id="ano" name="ano" required>
-
-            <label for="genero">Gênero</label>
-            <input type="text" id="genero" name="genero" required>
-
-            <label for="paginas">Número de Páginas</label>
-            <input type="number" id="paginas" name="paginas" required>
-
-            <label for="imagem">Imagem:</label>
-            <input type="file" id="imagem" name="imagem" accept="image/*">
+                <div class="container-submit">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" required>
+        
+                    <label for="autor">Autor</label>
+                    <input type="text" id="autor" name="autor" required>
+        
+                    <label for="editora">Editora</label>
+                    <input type="text" id="editora" name="editora" required>
+        
+                    <label for="ano">Ano de Lançamento</label>
+                    <input type="number" id="ano" name="ano" required>
+        
+                    <label for="genero">Gênero</label>
+                    <input type="text" id="genero" name="genero" required>
+        
+                    <label for="paginas">Número de Páginas</label>
+                    <input type="number" id="paginas" name="paginas" required>
+        
+                    <label for="imagem">Imagem:</label>
+                    <input type="file" id="imagem" name="imagem" accept="image/*" onchange="previewImage(event)">
+                </div>
+            </div>
 
             <button type="button" onclick="registerBook()">Registrar</button>
         </form>
@@ -63,6 +71,40 @@
         </div>
     </div>
     
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imgPreview = document.getElementById('img-preview');
+            const fileInput = document.getElementById('imagem');
+    
+            imgPreview.addEventListener('click', function(event) {
+                event.stopPropagation();
+                fileInput.click();
+            });
+    
+            fileInput.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        });
+    
+        function previewImage(event) {
+            const input = event.target;
+            const imgPreview = document.getElementById('img-preview');
+    
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+    
+                reader.onload = function(e) {
+                    imgPreview.src = e.target.result;
+                    imgPreview.style.display = 'block';
+                }
+    
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    
+    
+
     <script src="./_scripts/resgistro.js"></script>
     <script src="./_scripts/dark-theme.js"></script>
     <script src="https://kit.fontawesome.com/16ea865109.js" crossorigin="anonymous"></script>

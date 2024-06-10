@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca Virtual</title>
-    <meta name="description" content="Site de Biblioteca Virtual">
+    <title>Floreios & Borrões</title>
+    <meta name="description" content="Site de Biblioteca Virtual Floreios & Borrões">
     <meta name="author" content="Leonardo Boeira Maciel">
     <meta name="keywords" content="biblioteca, virtual">
     <link rel="icon" href="./_img/fav-icon.png" type="image/png">
@@ -23,7 +23,6 @@
         <a class="botao_head" href="consulta.html">Consultar Livros</a>
         <a class="botao_head" href="registrar.html">Registrar Livro</a>
         <a class="botao_head" href="login.html">Login</a>
-        <a class="botao_head" href="logout.html">Logout</a>
         <button id="toggleThemeButton" class="botao_head"></button>
     </div>
 
@@ -41,28 +40,14 @@
                 <p><strong>Gênero:</strong> <span id="genero"></span></p>
             </div>
         </div>
-        <a class="botao_container" href="registrar.html">Registrar outro livro</a>
+        <a class="botao_container" href="registrar.html" style="width: 240px;"><i class="fa-solid fa-check"
+                style="margin-right:10px; font-size: 25px;"></i>Registrar outro livro</a>
+        <a class="botao_container" id="editButton" href="edit-book.html"
+            style="width: 240px; background-color: var(--dark-color);"><i class="fa-solid fa-pencil"
+                style="margin-right:10px; font-size: 20px;"></i>Editar Livro</a>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const livrosRegistrados = JSON.parse(localStorage.getItem('books'));
-
-            if (livrosRegistrados && livrosRegistrados.length > 0) {
-                const livroRegistrado = livrosRegistrados[livrosRegistrados.length - 1];
-
-                document.getElementById('titulo').textContent = livroRegistrado.titulo;
-                document.getElementById('autor').textContent = livroRegistrado.autor;
-                document.getElementById('editora').textContent = livroRegistrado.editora;
-                document.getElementById('ano').textContent = livroRegistrado.ano;
-                document.getElementById('genero').textContent = livroRegistrado.genero;
-                const imagem = document.createElement('img');
-                imagem.src = livroRegistrado.imagem;
-                imagem.alt = livroRegistrado.titulo;
-                document.getElementById('imagem').appendChild(imagem);
-            }
-        });
-    </script>
+    <script src="./_scripts/submit.js"></script>
     <script src="./_scripts/dark-theme.js"></script>
     <script src="https://kit.fontawesome.com/16ea865109.js" crossorigin="anonymous"></script>
 </body>

@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     const listContainer = document.getElementById('listOfAllBooks');
+    const books = JSON.parse(localStorage.getItem('books')) || [];
 
     const observer = new ResizeObserver(() => {
         let quantidadeLivros = books.length;
-        const maxColumns = 6;
+        const maxColumns = 4;
         let columns = '';
 
         if (quantidadeLivros <= maxColumns) {
@@ -15,10 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
         listContainer.style.gridTemplateColumns = columns;
     });
 
-    // Observa mudanças no tamanho do container
     observer.observe(listContainer);
 
-    // Função para atualizar a exibição dos livros
     function updateBookList(books) {
         listContainer.innerHTML = '';
 
@@ -74,6 +73,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 bookCard.appendChild(btnRemove);
 
+                const btnEdit = document.createElement('button');
+                btnEdit.id = 'btnEdit';
+                btnEdit.textContent = 'Editar';
+                btnEdit.addEventListener('click', () => {
+                    localStorage.setItem('editBookIndex', index);
+                    window.location.href = 'edit-book.html';
+                });
+                bookCard.appendChild(btnEdit);
+                
                 listContainer.appendChild(bookCard);
             });
         }
@@ -109,7 +117,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Carrega os livros do localStorage
-    const books = JSON.parse(localStorage.getItem('books')) || [];
     updateBookList(books);
+
 });

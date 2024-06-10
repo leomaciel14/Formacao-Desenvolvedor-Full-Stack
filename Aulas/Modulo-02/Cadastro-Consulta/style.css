@@ -16,26 +16,7 @@
     --gradiente: linear-gradient(45deg, #086997, #0881b9);
     --cor-texto-botão: #ffffff;
 }
-/*
-:root {
-    --primary-color: #1086bd;
-    --secondary-color: #0d5678;
-    --success-color-1: #21cf49;
-    --success-color: #38a338;
-    --info-color: #17a2b8;
-    --warning-color: #ffc107;
-    --danger-color: #dc3545;
-    --light-color: rgb(214, 208, 235);
-    --dark-color: #343a40;
-    --white-color: #222;
-    --white-color-1: #111;
-    --white-color-2: #333;
-    --black-color: #fff;
-    --gray-color: #cbced1;
-    --gradiente: linear-gradient(45deg, #086997, #0881b9);
-    --cor-texto-botão: #fff;
-}
-*/
+
 body {
     font-family: "Montserrat", sans-serif;
     background-color: var(--white-color-1);
@@ -118,7 +99,7 @@ a:hover {
 }
 
 .logo {
-    max-height: 40px;
+    max-height: 55px;
     height: auto;
 }
 
@@ -126,17 +107,36 @@ a:hover {
 .container-min,
 .container-consulta,
 .container-submit,
-.container-AllBooks {
+.container-AllBooks,
+.container-edit,
+.container-form {
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
     justify-content: center;
-    margin: 50px auto;
+    margin: 30px auto;
     padding: 20px;
     background-color: var(--white-color);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
+}
+
+.container-form{
+    max-width: 750px;
+}
+
+.book-form-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    position: relative;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 50vh;
+    color: var(--black-color);
 }
 
 .container,
@@ -157,6 +157,10 @@ a:hover {
 
 .container-submit {
     max-width: 650px;
+}
+
+.container-edit {
+    max-width: 750px;
 }
 
 .login-container {
@@ -234,9 +238,11 @@ button:hover {
 }
 
 .filter-container{
+    position: relative;
     display: flex;
     align-items: center;
     color: var(--black-color);
+    max-width: 90%;
 }
 
 .filter-container input{
@@ -256,8 +262,9 @@ button:hover {
     background-color: var(--white-color-1);
     display: inline-flex;
     margin: 0px 40px;
-
+    width: 85px;
 }
+
 .filter-form label {
     display: inline-flex;
     margin-right: -30px;
@@ -267,7 +274,8 @@ button:hover {
 
 .filter-pesquisa input{
     background-color: var(--white-color-1);
-    width: 920px;
+    width: 400px;
+
 }
 
 .results {
@@ -314,6 +322,15 @@ button:hover {
     padding: 20px;
     height: 430px;
     width: 300px;
+}
+
+.submit-img img {
+    position: relative;
+    left: -27px;
+    padding: 20px;
+    height: 430px;
+    width: 300px;
+    border-radius: 30px;
 }
 
 .modal {
@@ -415,6 +432,7 @@ div#listOfBooksSearch {
 }
 
 .bookCard p {
+    margin: 3px;
     color: var(--black-color);
 }
 
@@ -427,7 +445,7 @@ div#listOfBooksSearch {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-bottom: 10px;
+    width: 125px;
 }
 
 .bookCard button#btnRemove:hover {
@@ -441,6 +459,32 @@ div#listOfBooksSearch {
     font-family: FontAwesome;
     font-size: 16px;
     margin-right: 5px;
+}
+
+.bookCard button#btnEdit {
+    background-color: var(--dark-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+    width: 125px;
+}
+
+.bookCard button#btnEdit:hover {
+    background-color: var(--secondary-color);
+}
+
+.bookCard button#btnEdit::before {
+    content: '\f303';
+    color: white;
+    position: relative;
+    font-family: FontAwesome;
+    font-size: 16px;
+    left: -10px;
 }
 
 button#btnRemove, button#cancelButton {
@@ -458,6 +502,18 @@ button#btnRemove::before {
     font-family: FontAwesome;
     font-size: 16px;
     right: 5px;
+}
+
+.botao-edit{
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
 }
 
 i {
@@ -517,6 +573,7 @@ div#listOfAllBooks img {
 #book-form input, .form-group  input {
     background-color: var(--white-color-1);
     color: var(--black-color);
+    width: 250px;
 }
 
 #book-form input#imagem {

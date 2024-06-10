@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca Virtual</title>
-    <meta name="description" content="Site de Biblioteca Virtual">
+    <title>Floreios & Borrões</title>
+    <meta name="description" content="Site de Biblioteca Virtual Floreios & Borrões">
     <meta name="author" content="Leonardo Boeira Maciel">
     <meta name="keywords" content="biblioteca, virtual">
     <link rel="icon" href="./_img/fav-icon.png" type="image/png">
@@ -23,13 +23,13 @@
         <a class="botao_head" id="esta-aqui" href="consulta.html">Consultar Livros</a>
         <a class="botao_head" href="registrar.html">Registrar Livro</a>
         <a class="botao_head" href="login.html">Login</a>
-        <a class="botao_head" href="logout.html">Logout</a>        
         <button id="toggleThemeButton" class="botao_head"></button>
     </div>
 
     <div class="text-consulta">
         <h2>Consulta de Livros</h2>
     </div>
+
     <div class="container-consulta">
         <div class="filter-container">
             <div class="filter-form">
@@ -39,13 +39,13 @@
                 </div>
 
                 <div class="filter-demais">
-                    <label for="filter-ano">Filtrar por Ano:</label>
+                    <label for="filter-ano">Ano:</label>
                     <input type="number" id="filter-ano" name="filter-ano">
 
-                    <label for="filter-autor">Filtrar por Autor:</label>
+                    <label for="filter-autor">Autor:</label>
                     <input type="text" id="filter-autor" name="filter-autor">
 
-                    <label for="filter-editora">Filtrar por Editora:</label>
+                    <label for="filter-editora">Editora:</label>
                     <input type="text" id="filter-editora" name="filter-editora">
                 </div>
             </div>
@@ -53,8 +53,21 @@
             <button class="filter-button" id="filter-button">Filtrar</button>
         </div>
         <div class="results" id="results">
+
         </div>
     </div>
+
+    <!-- Modal de Confirmação -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p>Tem certeza que deseja remover este livro?</p>
+            <div class="button-container">
+                <button id="confirmButton">Confirmar</button>
+                <button class="close" id="cancelButton">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="./_scripts/filtro.js"></script>
     <script src="./_scripts/dark-theme.js"></script>
     <script src="https://kit.fontawesome.com/16ea865109.js" crossorigin="anonymous"></script>

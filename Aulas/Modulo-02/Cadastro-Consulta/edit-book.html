@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floreios & Borrões</title>
+    <meta name="description" content="Site de Biblioteca Virtual Floreios & Borrões">
+    <meta name="author" content="Leonardo Boeira Maciel">
+    <meta name="keywords" content="biblioteca, virtual">
+    <link rel="icon" href="./_img/fav-icon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="head">
+        <img src="./_img/logo.png" alt="Logo Biblioteca Virtual" class="logo">
+        <a class="botao_head" href="index.html">Home</a>
+        <a class="botao_head" href="consulta.html">Consultar Livros</a>
+        <a class="botao_head" href="registrar.html">Registrar Livro</a>
+        <a class="botao_head" href="login.html">Login</a>
+        <button id="toggleThemeButton" class="botao_head"></button>
+    </div>
+
+    <div class="container-edit">
+        <h2>Editar Livro</h2>
+        <div class="submit">
+            <div class="submit-img">
+                <span class="bookImg" id="imagem"></span>
+            </div>
+            <form id="book-form" onsubmit="updateBook(); return false;">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo" placeholder="">
+
+                <label for="autor">Autor</label>
+                <input type="text" id="autor" name="autor" placeholder="">
+
+                <label for="editora">Editora</label>
+                <input type="text" id="editora" name="editora" placeholder="">
+
+                <label for="ano">Ano de Lançamento</label>
+                <input type="number" id="ano" name="ano" placeholder="">
+
+                <label for="genero">Gênero</label>
+                <input type="text" id="genero" name="genero" placeholder="">
+
+                <label for="paginas">Número de Páginas</label>
+                <input type="number" id="paginas" name="paginas" placeholder="">
+
+                <label for="imagem">Imagem:</label>
+                <input type="file" id="imagemInput" name="imagem" accept="image/*">
+
+                <button type="submit">Atualizar Livro</button>
+            </form>
+
+            <!-- Modal de Confirmação -->
+            <div id="confirmationModal" class="modal">
+                <div class="modal-content">
+                    <p>Livro atualizado com sucesso!</p>
+                    <button id="confirmButton">OK</button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const index = localStorage.getItem('editBookIndex');
+                const books = JSON.parse(localStorage.getItem('books')) || [];
+                const book = books[index];
+
+                if (book) {
+                    document.getElementById('titulo').value = book.titulo;
+                    document.getElementById('autor').value = book.autor;
+                    document.getElementById('editora').value = book.editora;
+                    document.getElementById('ano').value = book.ano;
+                    document.getElementById('genero').value = book.genero;
+                    document.getElementById('paginas').value = book.paginas;
+
+                    const imagem = document.createElement('img');
+                    imagem.src = book.imagem;
+                    imagem.alt = book.titulo;
+                    document.getElementById('imagem').appendChild(imagem);
+                }
+            });
+
+            function updateBook() {
+                const index = localStorage.getItem('editBookIndex');
+                const books = JSON.parse(localStorage.getItem('books')) || [];
+
+                if (books[index]) {
+                    const book = books[index];
+
+                    book.titulo = document.getElementById('titulo').value || book.titulo;
+                    book.autor = document.getElementById('autor').value || book.autor;
+                    book.editora = document.getElementById('editora').value || book.editora;
+                    book.ano = document.getElementById('ano').value || book.ano;
+                    book.genero = document.getElementById('genero').value || book.genero;
+                    book.paginas = document.getElementById('paginas').value || book.paginas;
+
+                    const imagemInput = document.getElementById('imagemInput');
+                    if (imagemInput.files.length > 0) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            book.imagem = e.target.result;
+                            saveBooks(books);
+                            alert('Livro atualizado com sucesso!');
+                            window.location.href = 'index.html';
+                        };
+                        reader.readAsDataURL(imagemInput.files[0]);
+                    } else {
+                        saveBooks(books);
+                        showModal();
+                    }
+                }
+            }
+
+            function saveBooks(books) {
+                localStorage.setItem('books', JSON.stringify(books));
+            }
+
+            function showModal() {
+                const modal = document.getElementById("confirmationModal");
+                modal.style.display = "block";
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const confirmButton = document.getElementById("confirmButton");
+                const closeButton = document.querySelector(".close");
+                const modal = document.getElementById("confirmationModal");
+
+                confirmButton.addEventListener("click", function () {
+                    modal.style.display = "none";
+                    window.location.href = 'index.html';
+                });
+
+                closeButton.addEventListener("click", function () {
+                    modal.style.display = "none";
+                });
+
+                // Adiciona um manipulador para fechar o modal ao clicar fora dele
+                window.addEventListener("click", function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                });
+            });
+
+        </script>
+
+        <script src="./_scripts/dark-theme.js"></script>
+        <script src="https://kit.fontawesome.com/16ea865109.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
