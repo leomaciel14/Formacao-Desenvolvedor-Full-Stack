@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const filterAutorInput = document.getElementById('filter-autor');
     const filterEditoraInput = document.getElementById('filter-editora');
     const filterButton = document.getElementById('filter-button');
-    const maxColumns = 6;
+    const maxColumns = 4;
 
     filterButton.addEventListener('click', filterBooks);
     const listContainer = document.getElementById('listOfAllBooks');

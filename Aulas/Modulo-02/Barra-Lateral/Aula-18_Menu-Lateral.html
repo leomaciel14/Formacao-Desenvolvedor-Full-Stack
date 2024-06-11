@@ -18,7 +18,9 @@
 <body>
     <div class="header">
         <div class="hamburger-menu" onclick="toggleMenu()">
-            <!-- &#9776; -->
+            <div class="icon-menu">
+                &#9776;
+            </div>
         </div>
         <div class="logo">
             <img src="_assets/Logo_GLOBOPLAY.png" alt="Logo GloboPlay" width="150px">
@@ -26,18 +28,36 @@
     </div>
 
     <nav id="sidebar" class="vertical-menu">
-            <a href="#" class="menu-item active" onclick="changeActiveItem(this)">Início</a>
-            <a href="#" class="menu-item" onclick="changeActiveItem(this)">Agora na TV</a>
-            <a href="#" class="menu-item" onclick="changeActiveItem(this)">Novelas</a>
-            <a href="#" class="menu-item" onclick="changeActiveItem(this)">Séries</a>
-            <a href="#" class="menu-item" onclick="changeActiveItem(this)">Filmes</a>
-            <a href="#" class="menu-item" onclick="changeActiveItem(this)">Esportes</a>
-            <a href="#" class="menu-item" onclick="changeActiveItem(this)">Catálogo</a>
+        <a href="#" class="menu-item active" onclick="changeActiveItem(this)"><i class="fa-solid fa-house"></i>Início</a>
+        <a href="#" class="menu-item" onclick="changeActiveItem(this)"><i class="fa-solid fa-play"></i>Agora na TV</a>
+        <a href="#" class="menu-item" onclick="changeActiveItem(this)"><i class="fa-solid fa-tv"></i>Novelas</a>
+        <a href="#" class="menu-item" onclick="changeActiveItem(this)"><i class="fa-solid fa-dragon"></i>Séries</a>
+        <a href="#" class="menu-item" onclick="changeActiveItem(this)"><i class="fa-solid fa-film"></i>Filmes</a>
+        <a href="#" class="menu-item" onclick="changeActiveItem(this)"><i class="fa-solid fa-futbol"></i>Esportes</a>
+        <a href="#" class="menu-item" onclick="changeActiveItem(this)"><i class="fa-solid fa-book-open"></i>Catálogo</a>
     </nav>
 
     <div class="content">
         <h1>Bem-vindo!</h1>
         <p>Conteúdo principal da página.</p>
+    </div>
+
+    <div class="catalogo">
+        <h2>Você não pode perder</h2>
+        <section class="catalogo-container">
+            <ul>
+                <li>1</li>
+            </ul>
+            <ul>
+                <li>2</li>
+            </ul>
+            <ul>
+                <li>3</li>
+            </ul>
+            <ul>
+                <li>4</li>
+            </ul>
+        </section>
     </div>
 
     <script>
@@ -66,6 +86,8 @@
             item.classList.add('active');
         }
     </script>
+
+    <script src="https://kit.fontawesome.com/16ea865109.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
