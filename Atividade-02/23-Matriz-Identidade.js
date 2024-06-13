@@ -6,7 +6,7 @@ diagonal principal são iguais a 1 e os demais são nulos.
 */
 
 let notacao = 7;
-let matriz = new Array
+let matriz = new Array();
 
 for (let i = 0; i < notacao; i++) {
     matriz.push(new Array(notacao).fill(0));
