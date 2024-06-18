@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa CEP</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="./output.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-800 py-6 sm:py-12">
+        <div class="relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
+            <div class="mx-auto max-w-md">
+                <img src="./_imgs/logo.png" class="h-11" alt="Logo Busca de CEP" />
+                
+                <div class="divide-y divide-gray-300/50">
+                    <div class="space-y-5 py-8 text-base leading-7 text-gray-600">
+                        <form id="cepForm">
+                            <label class="pt-8 text-base font-semibold leading-7" for="cep">Digite o CEP:</label>
+                            <input class="px-5 mb-7 h-10 mt-3 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" type="text" id="cep" name="cep" required>
+                            <button class="cursor-pointer py-3 px-6 bg-blue-600 text-white font-semibold rounded-full shadow-md hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-75"
+                                type="submit">Consultar</button>
+                        </form>
+                        <div id="result"></div>
+                    </div>
+
+                    <div class="pt-8 text-base font-regular leading-1">
+                        <p class="text-gray-900">Feito por
+                            <a href="https://github.com/leomaciel14" target="_blank"
+                                class="text-gray-600 hover:text-sky-600 font-semibold">Leonardo Boeira Maciel</a>
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <script>
+        document.getElementById('cepForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const cep = document.getElementById('cep').value;
+            const resultDiv = document.getElementById('result');
+
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => {
+                    if (!response.ok) {
+                        switch (response.status) {
+                            case 400:
+                                throw new Error('CEP inválido.');
+                            case 404:
+                                throw new Error('CEP não encontrado.');
+                            case 500:
+                                throw new Error('Erro no servidor. Tente novamente mais tarde.');
+                            default:
+                                throw new Error('Erro desconhecido.');
+                        }
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    resultDiv.innerHTML = `
+            <p><strong>Logradouro:</strong> ${data.logradouro}</p>
+            <p><strong>Bairro:</strong> ${data.bairro}</p>
+            <p><strong>Cidade:</strong> ${data.localidade}</p>
+            <p><strong>Estado:</strong> ${data.uf}</p>
+            `;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `<p style="color: red;">Erro: ${error.message}</p>`;
+                });
+        });
+    </script>
+
+    <script src="tailwind.config.js"></script>
+</body>
+
+</html>

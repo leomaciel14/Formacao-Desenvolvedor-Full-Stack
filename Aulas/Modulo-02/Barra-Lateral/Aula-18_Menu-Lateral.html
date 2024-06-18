@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Vertical</title>
-    <!-- <link rel="stylesheet" href="Aula-18_Menu-Lateral.css">       -->
     <link rel="stylesheet" href="Aula-18_Menu-Horizontal.css">
     <link rel="stylesheet" href="reset_estilos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +18,9 @@
     <div class="header">
         <div class="hamburger-menu" onclick="toggleMenu()">
             <div class="icon-menu">
-                &#9776;
+                <img id="menu-icon"
+                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB4PSIwIiB5PSIwIiB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIGQ9Ik0yOSA4SDNhMiAyIDAgMCAxIDAtNGgyNmEyIDIgMCAwIDEgMCA0ek0yOSAyOEgzYTIgMiAwIDAgMSAwLTRoMjZhMiAyIDAgMCAxIDAgNHpNMjkgMThIM2EyIDIgMCAwIDEgMC00aDI2YTIgMiAwIDAgMSAwIDR6IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIxIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIj48L3BhdGg+PC9nPjwvc3ZnPg=="
+                    alt="Menu">
             </div>
         </div>
         <div class="logo">
@@ -28,7 +29,8 @@
     </div>
 
     <nav id="sidebar" class="vertical-menu">
-        <a href="#" class="menu-item active" onclick="changeActiveItem(this)"><i class="fa-solid fa-house"></i>Início</a>
+        <a href="#" class="menu-item active" onclick="changeActiveItem(this)"><i
+                class="fa-solid fa-house"></i>Início</a>
         <a href="#" class="menu-item" onclick="changeActiveItem(this)"><i class="fa-solid fa-play"></i>Agora na TV</a>
         <a href="#" class="menu-item" onclick="changeActiveItem(this)"><i class="fa-solid fa-tv"></i>Novelas</a>
         <a href="#" class="menu-item" onclick="changeActiveItem(this)"><i class="fa-solid fa-dragon"></i>Séries</a>
@@ -37,29 +39,49 @@
         <a href="#" class="menu-item" onclick="changeActiveItem(this)"><i class="fa-solid fa-book-open"></i>Catálogo</a>
     </nav>
 
-    <div class="content">
-        <h1>Bem-vindo!</h1>
-        <p>Conteúdo principal da página.</p>
+    <div class="pelicula">
     </div>
 
-    <div class="catalogo">
-        <h2>Você não pode perder</h2>
-        <section class="catalogo-container">
-            <ul>
-                <li>1</li>
-            </ul>
-            <ul>
-                <li>2</li>
-            </ul>
-            <ul>
-                <li>3</li>
-            </ul>
-            <ul>
-                <li>4</li>
-            </ul>
-        </section>
-    </div>
+    <div class="blur">
+        <div class="content">
+            <!--
+                <h1>Bem-vindo!</h1>
+                <p>Conteúdo principal da página.</p>
+            -->
+        </div>
 
+        <div class="gallery-container-main">
+            <div class="gallery-container">
+                <ul class="gallery">
+                    <li class="gallery-item"><img src="./_assets/img_jogo_min-width_768px.avif" alt="Imagem 1"></li>
+                    <li class="gallery-item"><img src="./_assets/img_ncis_min-width_700px.jpg" alt="Imagem 2"></li>
+                    <li class="gallery-item"><img src="./_assets/img_voo_min-width_768px.avif" alt="Imagem 3"></li>
+                </ul>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+
+        </div>
+
+        <div class="catalogo">
+            <h2>Você não pode perder</h2>
+            <section class="catalogo-container">
+                <ul>
+                    <li>1</li>
+                </ul>
+                <ul>
+                    <li>2</li>
+                </ul>
+                <ul>
+                    <li>3</li>
+                </ul>
+                <ul>
+                    <li>4</li>
+                </ul>
+            </section>
+        </div>
+
+    </div>
     <script>
         function toggleMenu() {
             var sidebar = document.getElementById("sidebar");
@@ -68,11 +90,11 @@
             sidebar.classList.toggle("open");
 
             if (sidebar.classList.contains("open")) {
-                menuIcon.src = 'close-icon.png';
+                menuIcon.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB4PSIwIiB5PSIwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0xOC44MDcgNi42MDdhMSAxIDAgMCAwLTEuNDE0LTEuNDE0TDEyIDEwLjU4NiA2LjYwNyA1LjE5M2ExIDEgMCAxIDAtMS40MTQgMS40MTRMMTAuNTg2IDEybC01LjM5MyA1LjM5M2ExIDEgMCAxIDAgMS40MTQgMS40MTRMMTIgMTMuNDE0bDUuMzkzIDUuMzkzYTEgMSAwIDAgMCAxLjQxNC0xLjQxNEwxMy40MTQgMTJ6IiBvcGFjaXR5PSIxIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIj48L3BhdGg+PC9nPjwvc3ZnPg==';
                 menuIcon.alt = 'Fechar';
                 menuText.innerText = 'Fechar';
             } else {
-                menuIcon.src = 'menu-icon.png';
+                menuIcon.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB4PSIwIiB5PSIwIiB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIGQ9Ik0yOSA4SDNhMiAyIDAgMCAxIDAtNGgyNmEyIDIgMCAwIDEgMCA0ek0yOSAyOEgzYTIgMiAwIDAgMSAwLTRoMjZhMiAyIDAgMCAxIDAgNHpNMjkgMThIM2EyIDIgMCAwIDEgMC00aDI2YTIgMiAwIDAgMSAwIDR6IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIxIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIj48L3BhdGg+PC9nPjwvc3ZnPg==';
                 menuIcon.alt = 'Menu';
                 menuText.innerText = 'Menu';
             }
@@ -86,6 +108,8 @@
             item.classList.add('active');
         }
     </script>
+
+    <script src="galeria-home.js"></script>
 
     <script src="https://kit.fontawesome.com/16ea865109.js" crossorigin="anonymous"></script>
 </body>

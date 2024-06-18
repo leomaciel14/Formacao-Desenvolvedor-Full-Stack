@@ -1,0 +1,42 @@
+[
+    {
+        "pergunta": "Por que o programador foi ao dentista?",
+        "resposta": "Porque ele tinha um problema com seus 'bytes'."
+    },
+    {
+        "pergunta": "Como você chama um programador que acabou de sair do banho?",
+        "resposta": "Um 'script' limpo."
+    },
+    {
+        "pergunta": "O que o Java disse ao JavaScript?",
+        "resposta": "Você tem um bom futuro na web, garoto!"
+    },
+    {
+        "pergunta": "Por que os desenvolvedores gostam de iogurte?",
+        "resposta": "Porque ele tem cultura!"
+    },
+    {
+        "pergunta": "Quantos programadores são necessários para trocar uma lâmpada?",
+        "resposta": "Nenhum. Isso é um problema de hardware."
+    },
+    {
+        "pergunta": "Qual é o problema de ter 99 bugs?",
+        "resposta": "Você conserta um e tem 100 bugs!"
+    },
+    {
+        "pergunta": "O que um programador disse ao outro no elevador?",
+        "resposta": "Elevador não tem interface gráfica, só dá pra subir e descer."
+    },
+    {
+        "pergunta": "Por que o programador sempre se perde na floresta?",
+        "resposta": "Porque ele não pode encontrar as suas raízes."
+    },
+    {
+        "pergunta": "Por que o PHP é como o vinagre?",
+        "resposta": "Porque vai bem com batatas 'fritas'!"
+    },
+    {
+        "pergunta": "O que o HTML disse ao CSS?",
+        "resposta": "Você é estiloso!"
+    }
+]

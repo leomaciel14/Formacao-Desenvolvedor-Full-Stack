@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function* chat() {
+            let opcao = yield "E aí, tudo bem?"
+
+            while (true) {
+                if (opcao === 'sim') {
+                    yield "Ótimo"
+
+                    opcao = yield "Como eu posso te ajudar? Quer uma piada?"
+
+                    if (opcao === 'sim') {
+                        yield "Vou te contar uma piada"
+
+                        let piada = yield fetch('./piadas.json')
+                            .then(response => response.json())
+                            .then(piadas => {
+                                let piada = piadas[Math.floor(Math.random() * piadas.length)];
+                                return piada;
+                            });
+
+                        yield piada.pergunta;
+
+                        yield piada.resposta;
+
+                        opcao = yield "Quer mais uma piada?";
+                    } else {
+                        opcao = yield "Tudo bem, como eu posso te ajudar então?";
+                    }
+                } else {
+                    opcao = yield "Que pena, espero que você se sinta melhor em breve. Precisa de algo mais?";
+                }
+            }
+        }
+
+        let conversa = chat(); // Inicia o generator
+
+        function iniciarChat() {
+            let resposta = document.getElementById('resposta').value;
+            let iteracao = conversa.next(resposta);
+
+            if (!iteracao.done) {
+                if (iteracao.value instanceof Promise) {
+                    iteracao.value.then(result => {
+                        setTimeout(() => {
+                            document.getElementById('output').innerText = result.pergunta;
+                            setTimeout(() => {
+                                document.getElementById('output').innerText = result.resposta;
+                            }, 5000); // Exibe a resposta após 2 segundos
+                        }, 1000); // Exibe a pergunta após 1 segundo
+                    });
+                } else {
+                    setTimeout(() => {
+                        document.getElementById('output').innerText = iteracao.value;
+                    }, 1000);
+                }
+            } else {
+                document.getElementById('output').innerText = iteracao.value;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let iteracao = conversa.next(); // Inicia a primeira iteração
+            document.getElementById('output').innerText = iteracao.value;
+        });
+    </script>
+
+</head>
+
+<body>
+    <button type="button" onclick="iniciarChat()">Avançar</button>
+    Resposta: <input type="text" id="resposta">
+    <p id="output"></p>
+</body>
+
+</html>
