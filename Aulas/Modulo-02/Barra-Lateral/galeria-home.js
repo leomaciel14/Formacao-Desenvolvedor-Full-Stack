@@ -1,25 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
     const gallery = document.querySelector('.gallery');
     const slides = document.querySelectorAll('.gallery-item');
-    const totalSlides = slides.length;
-    const slideWidth = slides[0].offsetWidth + 20; // Largura do slide + gap
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
 
+    let totalSlides = slides.length;
     let slideIndex = 1; // Começa do segundo item
+    let slideWidth = slides[0].offsetWidth + 20; // Largura do slide + gap
 
     // Inicializa o carrossel
     function initializeCarousel() {
-        for (let i = 0; i < slides.length; i++) {
+        for (let i = 0; i < totalSlides; i++) {
             const cloneSlide = slides[i].cloneNode(true);
             gallery.appendChild(cloneSlide);
         }
+        totalSlides *= 2; // Dobra o número total de slides após clonar
     }
 
     // Função para mostrar os slides
     function showSlides() {
         const translateValue = slideIndex * -slideWidth;
         gallery.style.transform = `translateX(${translateValue}px)`;
+    }
+
+    // Atualiza a largura do slide e reposiciona os slides
+    function updateSlideWidth() {
+        slideWidth = slides[0].offsetWidth + 20;
+        showSlides();
     }
 
     // Event listeners para os botões de navegação
@@ -31,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             gallery.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
             setTimeout(() => {
                 gallery.style.transition = 'transform 0.5s ease';
-                slideIndex = totalSlides;
+                slideIndex = totalSlides / 2 - 1;
                 showSlides();
             }, 50);
         } else {
@@ -41,8 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     nextBtn.addEventListener('click', () => {
         slideIndex++;
-        if (slideIndex > totalSlides) {
-            slideIndex = 0;
+        if (slideIndex >= totalSlides) {
+            slideIndex = totalSlides / 2;
             gallery.style.transition = 'none';
             gallery.style.transform = `translateX(0px)`;
             setTimeout(() => {
@@ -54,6 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
             showSlides();
         }
     });
+
+    // Atualiza a largura do slide quando a janela é redimensionada
+    window.addEventListener('resize', updateSlideWidth);
 
     // Mostra o primeiro slide ao carregar a página
     initializeCarousel();

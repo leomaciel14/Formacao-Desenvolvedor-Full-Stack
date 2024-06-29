@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .menu {
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .custom-gradient {
+            background: linear-gradient(50deg, #ff4169, #7c26f8);
+        }
+
+        .relative-container {
+            position: relative;
+            width: 100%;
+            height: 790px;
+            z-index: 0;
+        }
+
+        .absolute-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .capa {
+            height: 70vh;
+            width: auto;
+        }
+
+        .ruido {
+            background: url('./assets/ruido.png') repeat;
+            background-repeat: repeat;
+            background-size: cover;
+            opacity: 0.5;
+            height: 70vh;
+
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            z-index: 10;
+        }
+
+        nav {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+
+    <nav class="bg-zinc-900/80">
+        <div class="mx-auto max-w-7xl h-24 flex items-center px-2 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-between w-full">
+
+                <div class="flex flex-1 justify-center sm:justify-start items-center">
+                    <div class="flex flex-shrink-0 items-center">
+                        <img class="h-11 ml-5 w-auto" src="./assets/spotify.svg" alt="Spotify">
+                    </div>
+                </div>
+
+                <div class="hidden sm:flex space-x-2">
+                    <a href="#" class="rounded-md px-3 py-2 font-medium text-white">Premium</a>
+                    <a href="#"
+                        class="rounded-md px-3 py-2 font-normal text-zinc-300 hover:bg-zinc-700 hover:text-white">Ajuda</a>
+                    <a href="#"
+                        class="rounded-md px-3 py-2 font-normal text-zinc-300 hover:bg-zinc-700 hover:text-white">Baixar</a>
+                    <a href="#" class="rounded-md px-3 py-2 text-zinc-300">|</a>
+                    <a href="#"
+                        class="rounded-md px-3 py-2 font-normal text-zinc-300 hover:bg-zinc-700 hover:text-white">Inscreva-se</a>
+                    <a href="#"
+                        class="rounded-md px-3 py-2 font-normal text-zinc-300 hover:bg-zinc-700 hover:text-white">Entrar</a>
+                </div>
+
+            </div>
+
+            <div class="sm:hidden">
+                <button id="hamburger" class="text-gray-300 hover:text-white focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+
+        <div id="mobile-menu" class="sm:hidden overflow-hidden max-h-0 menu bg-zinc-900/10">
+            <a href="#"
+                class="block px-3 py-2 font-medium text-white text-center hover:bg-zinc-700 hover:text-white text-center">Premium</a>
+            <a href="#"
+                class="block px-3 py-2 font-normal text-zinc-300 hover:bg-zinc-700 hover:text-white text-center">Ajuda</a>
+            <a href="#"
+                class="block px-3 py-2 font-normal text-zinc-300 hover:bg-zinc-700 hover:text-white text-center">Baixar</a>
+            <a href="#"
+                class="block px-3 py-2 font-normal text-zinc-300 hover:bg-zinc-700 hover:text-white text-center">Inscreva-se</a>
+            <a href="#"
+                class="block px-3 py-2 font-normal text-zinc-300 hover:bg-zinc-700 hover:text-white text-center">Entrar</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="relative-container overflow-hidden">
+
+            <div class="relative-container absolute-overlay">
+                <div class="absolute-overlay custom-gradient"></div>
+                <div class="absolute-overlay ruido"></div>
+                <img class="absolute-overlay w-full object-cover capa" src="./assets/capa.png" alt="Imagem de Fundo">
+            </div>
+
+            <div class="flex items-center justify-center mt-80">
+                <div class="relative z-10 w-full text-white text-center">
+                    <div id="carouselExample" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <h1 class="font-bold text-4xl sm:text-6xl md:text-8xl lg:text-8xl xl:text-8xl">Música
+                                    para todos</h1>
+                            </div>
+                            <div class="carousel-item">
+                                <h1 class="font-bold text-4xl sm:text-6xl md:text-8xl lg:text-8xl xl:text-8xl">Todas as
+                                    Rádios</h1>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <div class="mt-9">
+                        <button
+                            class="mt-4 mr-4 px-8 py-4 bg-purple-700 font-semibold text-white uppercase rounded-full hover:bg-purple-900 transition-colors duration-300">Aproveite
+                            o Spotify Free</button>
+                        <button
+                            class="mt-4 mr-4 px-8 py-4 font-semibold rounded-full border-2 border-white uppercase hover:bg-white hover:text-black transition-colors duration-300">Obter
+                            Spotify Premium</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-8">
+        <div class="flex flex-col lg:flex-row lg:space-x-8">
+            <div class="grid grid-cols-2 gap-4 lg:w-1/2">
+                <img src="./assets/img1.jpg" alt="" class="">
+                <img src="./assets/img2.jpg" alt="">
+                <img src="./assets/img3.jpg" alt="">
+                <img src="./assets/img4.jpg" alt="">
+            </div>
+            <div class="mt-8 lg:mt-0 lg:w-1/2">
+                <h1 class="text-purple-600 font-bold text-5xl mb-4">O que o Spotify tem?</h1>
+                <h2 class="text-purple-600 font-bold text-2xl">Músicas</h2>
+                <p class="mb-6">O Spotify tem milhões de músicas. Escute seus sons favoritos, descubra novas músicas e
+                    reúna seus
+                    favoritos em um só lugar.</p>
+                <h2 class="text-purple-600 font-bold text-2xl">Playlists</h2>
+                <p class="mb-6">No Spotify você encontra uma playlist para cada momento. Todas feitas por fanáticos e
+                    especialistas da
+                    música.</p>
+                <h2 class="text-purple-600 font-bold text-2xl">Novos lançamentos</h2>
+                <p class="mb-6">Escute os novos lançamentos de singles e álbuns da semana e veja o que está bombando no
+                    Top 50.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="benefitis">
+        <div class="relative-container sm:h-auto">
+
+            <div class="relative-container absolute-overlay overflow-hidden">
+                <div class="absolute-overlay custom-gradient"></div>
+                <div class="absolute-overlay ruido"></div>
+                <img class="absolute-overlay w-full object-cover capa" src="./assets/capa.png" alt="Imagem de Fundo">
+            </div>
+
+            <div class="flex flex-col md:flex-row z-10 mx-auto">
+                <div class="flex flex-col items-start p-8 my-auto relative xl:ml-32 sm:ml-4 max-w-md">
+                    <h1 class="text-white font-bold text-5xl mb-4">Fácil</h1>
+                    <h2 class="text-teal-200 font-bold text-4xl mb-1">Buscar</h2>
+                    <p class="text-white mb-4">Já sabe o que quer escutar? É só procurar e apertar o play.</p>
+                    <h2 class="text-teal-200 font-bold text-4xl mb-1">Navegar</h2>
+                    <p class="text-white mb-4">Veja os novos lançamentos, o que está bombando nas paradas e as melhores
+                        playlist para o seu momento.
+                    </p>
+                    <h2 class="text-teal-200 font-bold text-4xl mb-1">Descobrir</h2>
+                    <p class="text-white mb-4">Curta músicas novas toda segunda-feira com uma playlist personalizada pra
+                        você. Ou relaxe e curta uma
+                        das
+                        rádios.</p>
+                </div>
+
+                <div
+                    class="flex justify-end flex-col xl:translate-x-64 lg:flex-row items-center p-8 md:p-2 my-auto relative w-full md:w-1/3 md:translate-x-72 xl:ml-32 sm:ml-4 sm:translate-x-12">
+                    <div class="flex justify-center items-center -translate-y-[3rem]">
+                        <img src="./assets/iphone1.png" alt="" class="mx-4 rotate-[35deg]">
+                        <img src="./assets/iphone2.png" alt=""
+                            class="mx-4 rotate-[35deg] translate-y-[0.7rem] translate-x-8 xl:translate-x-12 lg:translate-x-8 md:translate-x-8 sm:translate-x-8">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-zinc-900 text-white py-10 z-20 relative">
+            <div class="container mx-auto flex flex-wrap justify-between items-center">
+
+                <div class="w-full md:w-auto mr-8 mb-6 md:mb-0">
+                    <img src="./assets/spotify.svg" alt="Logo" class="h-16">
+                </div>
+
+                <div class="w-full md:w-1/5 mb-6 md:mb-0">
+                    <h3 class="font-bold mb-2">COMPANY</h3>
+                    <ul>
+                        <li><a href="#" class="hover:underline">Sobre</a></li>
+                        <li><a href="#" class="hover:underline">Empregos</a></li>
+                        <li><a href="#" class="hover:underline">Imprensa</a></li>
+                        <li><a href="#" class="hover:underline">Novidades</a></li>
+                    </ul>
+                </div>
+
+                <div class="w-full md:w-1/5 mb-6 md:mb-0">
+                    <h3 class="font-bold mb-2">COMMUNITIES</h3>
+                    <ul>
+                        <li><a href="#" class="hover:underline">Artistas</a></li>
+                        <li><a href="#" class="hover:underline">Desenvolvedores</a></li>
+                        <li><a href="#" class="hover:underline">Marcas</a></li>
+                    </ul>
+                </div>
+
+                <div class="w-full md:w-1/5 mb-6 md:mb-0">
+                    <h3 class="font-bold mb-2">USEFUL LINKS</h3>
+                    <ul>
+                        <li><a href="#" class="hover:underline">Ajuda</a></li>
+                        <li><a href="#" class="hover:underline">Presetes</a></li>
+                        <li><a href="#" class="hover:underline">Player da web</a></li>
+                    </ul>
+                </div>
+
+                <div class="w-full md:w-auto flex justify-center md:justify-center sm:justify-center">
+                    <a href="#" class="mr-4 flex items-center justify-center h-16 w-16"><img
+                            src="./assets/instagram.png" alt="Instagram" class="object-contain"></a>
+                    <a href="#" class="mr-4 flex items-center justify-center h-16 w-16"><img src="./assets/twitter.png"
+                            alt="Twitter" class="object-contain"></a>
+                    <a href="#" class="flex items-center justify-center h-16 w-16"><img src="./assets/facebook.png"
+                            alt="Facebook" class="object-contain"></a>
+                </div>
+            </div>
+        </footer>
+
+
+
+        <script>
+            document.getElementById('hamburger').addEventListener('click', function () {
+                var menu = document.getElementById('mobile-menu');
+                if (menu.classList.contains('max-h-0')) {
+                    menu.classList.remove('max-h-0');
+                    menu.classList.add('max-h-screen');
+                } else {
+                    menu.classList.remove('max-h-screen');
+                    menu.classList.add('max-h-0');
+                }
+            });
+        </script>
+</body>
+
+</html>
