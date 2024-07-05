@@ -3,21 +3,30 @@ import React, { useRef, useEffect } from 'react';
 
 const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate, onLoadedData, repeat }) => {
   const ref = useRef(null);
-  // eslint-disable-next-line no-unused-expressions
-  if (ref.current) {
-    if (isPlaying) {
-      ref.current.play();
-    } else {
-      ref.current.pause();
-    }
-  }
 
   useEffect(() => {
-    ref.current.volume = volume;
-  }, [volume]);
-  // updates audio element only on seekTime change (and not on each rerender):
+    if (ref.current) {
+      if (isPlaying) {
+        const playPromise = ref.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => console.log(error));
+        }
+      } else {
+        ref.current.pause();
+      }
+    }
+  }, [isPlaying]);
+
   useEffect(() => {
-    ref.current.currentTime = seekTime;
+    if (ref.current) {
+      ref.current.volume = volume;
+    }
+  }, [volume]);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.currentTime = seekTime;
+    }
   }, [seekTime]);
 
   return (
