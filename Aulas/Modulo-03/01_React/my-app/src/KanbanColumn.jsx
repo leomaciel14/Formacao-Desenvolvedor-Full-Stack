@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Task } from './Task';
 import { AiOutlinePlus } from 'react-icons/ai';
 
@@ -14,22 +13,26 @@ export const KanbanColumn = ({ columnId, column, addTask, removeTask, moveTask }
     };
 
     return (
-        <ColumnContainer>
-            <ColumnHeader>
+        <div className="w-1/3 m-3 bg-gray-200 rounded-lg p-4 text-left sm: text-center w-full">
+            <div className="flex flex-col">
                 <h2>{column.name}</h2>
-                <AddTaskContainer>
-                    <AddTaskInput
+                <div className="flex mt-2">
+                    <input
                         type="text"
                         value={newTaskContent}
                         onChange={(e) => setNewTaskContent(e.target.value)}
-                        placeholder="Add new task"
+                        className="flex-1 p-2 rounded-md border border-gray-300"
+                        placeholder="Adicionar nova task"
                     />
-                    <AddTaskButton onClick={handleAddTask}>
+                    <button
+                        onClick={handleAddTask}
+                        className="bg-pink-500 text-white rounded-md ml-2 p-2"
+                    >
                         <AiOutlinePlus />
-                    </AddTaskButton>
-                </AddTaskContainer>
-            </ColumnHeader>
-            <TasksContainer>
+                    </button>
+                </div>
+            </div>
+            <div className="mt-4">
                 {column.items.map(task => (
                     <Task
                         key={task.id}
@@ -39,46 +42,7 @@ export const KanbanColumn = ({ columnId, column, addTask, removeTask, moveTask }
                         moveTask={moveTask}
                     />
                 ))}
-            </TasksContainer>
-        </ColumnContainer>
+            </div>
+        </div>
     );
 };
-
-const ColumnContainer = styled.div`
-  width: 30%;
-  background-color: #f4f5f7;
-  border-radius: 5px;
-  padding: 20px;
-  text-align: left;
-`;
-
-const ColumnHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const AddTaskContainer = styled.div`
-  display: flex;
-  margin-top: 10px;
-`;
-
-const AddTaskInput = styled.input`
-  flex: 1;
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-`;
-
-const AddTaskButton = styled.button`
-  background-color: #5aac44;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin-left: 5px;
-  cursor: pointer;
-`;
-
-const TasksContainer = styled.div`
-  margin-top: 20px;
-`;

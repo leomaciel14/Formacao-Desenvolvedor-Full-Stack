@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { KanbanColumn } from './KanbanColumn';
 
 const initialColumns = {
     todo: {
-        name: 'To Do',
+        name: 'A Fazer',
         items: []
     },
     inProgress: {
-        name: 'In Progress',
+        name: 'Em progresso',
         items: []
     },
     done: {
-        name: 'Done',
+        name: 'Feito',
         items: []
     }
 };
@@ -57,7 +56,7 @@ export const KanbanBoard = () => {
     };
 
     return (
-        <BoardContainer>
+        <div className="flex flex-col sm:flex-row justify-center items-center p-2 w-full">
             {Object.entries(columns).map(([columnId, column]) => (
                 <KanbanColumn
                     key={columnId}
@@ -68,12 +67,6 @@ export const KanbanBoard = () => {
                     moveTask={moveTask}
                 />
             ))}
-        </BoardContainer>
+        </div>
     );
 };
-
-const BoardContainer = styled.div`
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-`;

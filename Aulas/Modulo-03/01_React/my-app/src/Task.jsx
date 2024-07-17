@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiOutlineDelete, AiOutlineArrowRight, AiOutlineArrowLeft, AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 
 export const Task = ({ task, columnId, removeTask, moveTask }) => {
     const handleRemove = () => {
@@ -18,51 +17,53 @@ export const Task = ({ task, columnId, removeTask, moveTask }) => {
     };
 
     return (
-        <TaskContainer>
-            <TaskContent>{task.content}</TaskContent>
-            <TaskActions>
-                <ActionButton onClick={handleMoveLeft} disabled={columnId === 'todo'}>
+        <div className="bg-white rounded-lg p-2 mb-2 flex justify-between items-center">
+            <div className="flex-1 sm: text-left">{task.content}</div>
+            <div className="flex gap-2 sm: gap-1">
+                {/* Setas para cima/baixo em telas pequenas */}
+                <button
+                    onClick={handleMoveLeft}
+                    disabled={columnId === 'todo'}
+                    className={`bg-gray-300 rounded-md p-2 ${columnId === 'todo' ? 'cursor-not-allowed bg-gray-400' : 'hover:bg-gray-400'} sm:hidden`}
+                >
+                    <AiOutlineArrowUp />
+                </button>
+
+                <button
+                    onClick={handleMoveRight}
+                    disabled={columnId === 'done'}
+                    className={`bg-gray-300 rounded-md p-2 ${columnId === 'done' ? 'cursor-not-allowed bg-gray-400' : 'hover:bg-gray-400'} sm:hidden`}
+                >
+                    <AiOutlineArrowDown />
+                </button>
+                
+
+
+                <button
+                    onClick={handleMoveLeft}
+                    disabled={columnId === 'todo'}
+                    className={`bg-gray-300 rounded-md p-1 ${columnId === 'todo' ? 'cursor-not-allowed bg-gray-400' : 'hover:bg-gray-400'} hidden sm:flex`}
+                >
                     <AiOutlineArrowLeft />
-                </ActionButton>
-                <ActionButton onClick={handleMoveRight} disabled={columnId === 'done'}>
+                </button>
+
+                <button
+                    onClick={handleMoveRight}
+                    disabled={columnId === 'done'}
+                    className={`bg-gray-300 rounded-md p-1 ${columnId === 'done' ? 'cursor-not-allowed bg-gray-400' : 'hover:bg-gray-400'} hidden sm:flex`}
+                >
                     <AiOutlineArrowRight />
-                </ActionButton>
-                <ActionButton onClick={handleRemove}>
+                </button>
+
+
+
+                <button
+                    onClick={handleRemove}
+                    className="bg-red-600 rounded-md p-2 hover:bg-red-700"
+                >
                     <AiOutlineDelete />
-                </ActionButton>
-            </TaskActions>
-        </TaskContainer>
+                </button>
+            </div>
+        </div>
     );
 };
-
-const TaskContainer = styled.div`
-  background-color: white;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const TaskContent = styled.div`
-  flex: 1;
-`;
-
-const TaskActions = styled.div`
-  display: flex;
-  gap: 5px;
-`;
-
-const ActionButton = styled.button`
-  background-color: #ccc;
-  border: none;
-  border-radius: 5px;
-  padding: 5px;
-  cursor: pointer;
-
-  &:disabled {
-    cursor: not-allowed;
-    background-color: #eee;
-  }
-`;
