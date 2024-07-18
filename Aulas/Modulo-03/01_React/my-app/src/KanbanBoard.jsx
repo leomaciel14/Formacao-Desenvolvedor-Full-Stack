@@ -56,7 +56,7 @@ export const KanbanBoard = () => {
     };
 
     return (
-        <div className="flex flex-col sm:flex-row justify-center items-center p-2 w-full">
+        <div className="flex flex-col items-start sm:flex-row justify-center p-2 w-full">
             {Object.entries(columns).map(([columnId, column]) => (
                 <KanbanColumn
                     key={columnId}

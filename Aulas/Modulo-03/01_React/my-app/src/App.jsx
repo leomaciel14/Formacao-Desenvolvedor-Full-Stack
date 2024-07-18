@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { KanbanBoard } from './KanbanBoard';
 import TextAreaMirror from './TextAreaMirror';
-import CookieClicker from './CookieClicker'
+import CookieClicker from './CookieClicker';
+import Home from './Home';
 import { AiFillCaretDown } from 'react-icons/ai';
+import { AiFillCaretUp } from 'react-icons/ai';
 import { AiOutlineLoading } from 'react-icons/ai';
 import './App.css';
 import './index.css';
 
 const App = () => {
-  const [activeTab, setActiveTab] = useState('kanban');
+  const [activeTab, setActiveTab] = useState('Home');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar a abertura do menu
@@ -46,7 +48,7 @@ const App = () => {
       case 'app2':
         return <CookieClicker />;
       default:
-        return null;
+        return <Home />;
     }
   };
 
@@ -57,9 +59,17 @@ const App = () => {
         <div className="flex-row justify-between justify-items-center items-center px-4 sm:px-6">
           <h1 className="text-5xl font-bold text-center mb-8 text-white">Aplicativos <br></br>React</h1>
 
-          <div className='flex items-center justify-center'>
+          <div className={`flex items-center justify-center`}>
             <AiFillCaretDown
-              className={`animate-bounce p-1 mb-4 text-white items-center text-center cursor-pointer block sm:hidden ${isMenuOpen ? 'rotate-180' : ''}`}
+              className={`animate-bounce p-1 text-white items-center text-center cursor-pointer block md:hidden ${isMenuOpen ? 'hidden' : ''}`}
+              size={30}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+          </div>
+
+          <div className={`flex items-center justify-center`}>
+            <AiFillCaretUp
+              className={`animate-bounce p-1 text-white items-center text-center cursor-pointer block md:hidden ${isMenuOpen ? '' : 'hidden'}`}
               size={30}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             />
@@ -68,9 +78,9 @@ const App = () => {
         </div>
 
         {/* Menu de navegação */}
-        <nav className={`pb-6 ${isMenuOpen ? 'block' : 'hidden'} sm:block`}>
+        <nav className={`pb-6 ${isMenuOpen ? 'flex flex-col gap-2' : 'hidden'} md:block`}>
           <button
-            className={`mx-2 px-6 py-3 rounded-full ${activeTab === 'app0' ? 'bg-rose-500 text-white' : 'bg-white'
+            className={`mx-2 px-6 py-3 rounded-full  transition-all hover:bg-pink-300 ${activeTab === 'app0' ? 'bg-pink-500 text-white font-bold hover:bg-pink-500' : 'bg-white'
               }`}
             onClick={() => {
               setActiveTab('app0');
@@ -80,7 +90,7 @@ const App = () => {
             To Do List
           </button>
           <button
-            className={`mx-2 px-6 py-3 rounded-full ${activeTab === 'app1' ? 'bg-rose-500 text-white' : 'bg-white'
+            className={`mx-2 px-6 py-3 rounded-full transition-all hover:bg-pink-300 ${activeTab === 'app1' ? 'bg-pink-500 text-white font-bold hover:bg-pink-500' : 'bg-white'
               }`}
             onClick={() => {
               setActiveTab('app1');
@@ -90,7 +100,7 @@ const App = () => {
             Text Write Speed
           </button>
           <button
-            className={`mx-2 px-6 py-3 rounded-full ${activeTab === 'app2' ? 'bg-rose-500 text-white' : 'bg-white'
+            className={`mx-2 px-6 py-3 rounded-full transition-all hover:bg-pink-300 ${activeTab === 'app2' ? 'bg-pink-500 text-white font-bold hover:bg-pink-500' : 'bg-white'
               }`}
             onClick={() => {
               setActiveTab('app2');

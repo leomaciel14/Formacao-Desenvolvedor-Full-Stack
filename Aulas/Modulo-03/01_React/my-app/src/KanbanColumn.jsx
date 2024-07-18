@@ -13,7 +13,7 @@ export const KanbanColumn = ({ columnId, column, addTask, removeTask, moveTask }
     };
 
     return (
-        <div className="w-1/3 m-3 bg-gray-200 rounded-lg p-4 text-left sm: text-center w-full">
+        <div className="text-center w-full xl:w-1/3 m-3 bg-gray-200 rounded-lg p-4 text-left">
             <div className="flex flex-col">
                 <h2>{column.name}</h2>
                 <div className="flex mt-2">
