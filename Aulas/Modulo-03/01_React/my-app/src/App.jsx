@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { KanbanBoard } from './components/KanbanBoard';
+import { KanbanBoard } from './KanbanBoard';
 import './App.css';
 
 const App = () => {
@@ -16,9 +16,9 @@ const App = () => {
   );
 };
 
-export default App;
-
 const AppContainer = styled.div`
   text-align: center;
   padding: 20px;
 `;
+
+export default App;

@@ -1,11 +1,18 @@
+// KanbanBoard.js
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { KanbanColumn } from './KanbanColumn';
 
+
 const initialColumns = {
     todo: {
         name: 'To Do',
-        items: []
+        items: [
+            { content: "Tarefa 1", id: 1 },
+            { content: "Tarefa 2", id: 2 },
+            { content: "Tarefa 3", id: 3 }
+        ]
     },
     inProgress: {
         name: 'In Progress',
@@ -17,7 +24,7 @@ const initialColumns = {
     }
 };
 
-export const KanbanBoard = () => {
+const KanbanBoard = () => {
     const [columns, setColumns] = useState(initialColumns);
 
     const addTask = (columnId, taskContent) => {
@@ -56,6 +63,19 @@ export const KanbanBoard = () => {
         });
     };
 
+    const editTask = (columnId, taskId, newContent) => {
+        const updatedTasks = columns[columnId].items.map(task =>
+            task.id === taskId ? { ...task, content: newContent } : task
+        );
+        setColumns({
+            ...columns,
+            [columnId]: {
+                ...columns[columnId],
+                items: updatedTasks
+            }
+        });
+    };
+
     return (
         <BoardContainer>
             {Object.entries(columns).map(([columnId, column]) => (
@@ -66,6 +86,7 @@ export const KanbanBoard = () => {
                     addTask={addTask}
                     removeTask={removeTask}
                     moveTask={moveTask}
+                    editTask={editTask} // Passando a função editTask para o KanbanColumn
                 />
             ))}
         </BoardContainer>
@@ -73,7 +94,9 @@ export const KanbanBoard = () => {
 };
 
 const BoardContainer = styled.div`
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
 `;
+
+export { KanbanBoard };

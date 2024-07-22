@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Task } from './Task';
+import Task from './Task'; // Corrigido o caminho de importação
 import { AiOutlinePlus } from 'react-icons/ai';
 
 export const KanbanColumn = ({ columnId, column, addTask, removeTask, moveTask }) => {
     const [newTaskContent, setNewTaskContent] = useState('');
+    const [editingTaskId, setEditingTaskId] = useState(null);
+    const [editedTaskContent, setEditedTaskContent] = useState('');
 
     const handleAddTask = () => {
         if (newTaskContent.trim() !== '') {
             addTask(columnId, newTaskContent);
             setNewTaskContent('');
         }
+    };
+
+    const handleEditClick = (taskId, taskContent) => {
+        setEditingTaskId(taskId);
+        setEditedTaskContent(taskContent);
+    };
+
+    const handleSaveTask = (taskId, editedContent) => {
+        moveTask(columnId, columnId, taskId, editedContent);
+        setEditingTaskId(null);
+    };
+
+    const handleCancelEdit = () => {
+        setEditingTaskId(null);
+        setEditedTaskContent('');
     };
 
     return (
@@ -37,6 +54,10 @@ export const KanbanColumn = ({ columnId, column, addTask, removeTask, moveTask }
                         columnId={columnId}
                         removeTask={removeTask}
                         moveTask={moveTask}
+                        onEdit={() => handleEditClick(task.id, task.content)}
+                        onSave={(id, content) => handleSaveTask(id, content)}
+                        onCancelEdit={handleCancelEdit}
+                        editing={editingTaskId === task.id}
                     />
                 ))}
             </TasksContainer>

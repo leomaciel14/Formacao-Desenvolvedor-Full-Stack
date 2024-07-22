@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 
-export const Task = ({ task, columnId, removeTask, moveTask }) => {
+const Task = ({ task, columnId, removeTask, moveTask, onEdit, onSave, onCancelEdit, editing }) => {
+    const [newContent, setNewContent] = useState(task.content);
+
     const handleRemove = () => {
         removeTask(columnId, task.id);
     };
@@ -19,21 +21,40 @@ export const Task = ({ task, columnId, removeTask, moveTask }) => {
 
     return (
         <TaskContainer>
-            <TaskContent>{task.content}</TaskContent>
-            <TaskActions>
-                <ActionButton onClick={handleMoveLeft} disabled={columnId === 'todo'}>
-                    <AiOutlineArrowLeft />
-                </ActionButton>
-                <ActionButton onClick={handleMoveRight} disabled={columnId === 'done'}>
-                    <AiOutlineArrowRight />
-                </ActionButton>
-                <ActionButton onClick={handleRemove}>
-                    <AiOutlineDelete />
-                </ActionButton>
-            </TaskActions>
+            {editing ? (
+                <EditingContainer>
+                    <EditInput
+                        type="text"
+                        value={newContent}
+                        onChange={(e) => setNewContent(e.target.value)}
+                    />
+                    <SaveButton onClick={() => onSave(task.id, newContent)}>Save</SaveButton>
+                    <CancelButton onClick={onCancelEdit}>Cancel</CancelButton>
+                </EditingContainer>
+            ) : (
+                <>
+                    <TaskContent>{task.content}</TaskContent>
+                    <TaskActions>
+                        <ActionButton onClick={handleMoveLeft} disabled={columnId === 'todo'}>
+                            <AiOutlineArrowLeft />
+                        </ActionButton>
+                        <ActionButton onClick={handleMoveRight} disabled={columnId === 'done'}>
+                            <AiOutlineArrowRight />
+                        </ActionButton>
+                        <ActionButton onClick={onEdit}>
+                            <AiOutlineEdit />
+                        </ActionButton>
+                        <ActionButton onClick={handleRemove}>
+                            <AiOutlineDelete />
+                        </ActionButton>
+                    </TaskActions>
+                </>
+            )}
         </TaskContainer>
     );
 };
+
+export default Task;
 
 const TaskContainer = styled.div`
   background-color: white;
@@ -65,4 +86,35 @@ const ActionButton = styled.button`
     cursor: not-allowed;
     background-color: #eee;
   }
+`;
+
+const EditingContainer = styled.div`
+  display: flex;
+  gap: 5px;
+  flex: 1;
+`;
+
+const EditInput = styled.input`
+  flex: 1;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+`;
+
+const SaveButton = styled.button`
+  background-color: #5aac44;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+`;
+
+const CancelButton = styled.button`
+  background-color: #ccc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
 `;
