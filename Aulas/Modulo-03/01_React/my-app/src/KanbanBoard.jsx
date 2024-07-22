@@ -1,25 +1,20 @@
 // KanbanBoard.js
 
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { KanbanColumn } from './KanbanColumn';
 
 
 const initialColumns = {
     todo: {
-        name: 'To Do',
-        items: [
-            { content: "Tarefa 1", id: 1 },
-            { content: "Tarefa 2", id: 2 },
-            { content: "Tarefa 3", id: 3 }
-        ]
+        name: 'A Fazer',
+        items: []
     },
     inProgress: {
-        name: 'In Progress',
+        name: 'Em progresso',
         items: []
     },
     done: {
-        name: 'Done',
+        name: 'Feito',
         items: []
     }
 };
@@ -77,7 +72,7 @@ const KanbanBoard = () => {
     };
 
     return (
-        <BoardContainer>
+        <div className="flex flex-col items-start sm:flex-row justify-center p-2 w-full">
             {Object.entries(columns).map(([columnId, column]) => (
                 <KanbanColumn
                     key={columnId}
@@ -89,14 +84,6 @@ const KanbanBoard = () => {
                     editTask={editTask} // Passando a função editTask para o KanbanColumn
                 />
             ))}
-        </BoardContainer>
+        </div>
     );
 };
-
-const BoardContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  padding: 20px;
-`;
-
-export { KanbanBoard };
