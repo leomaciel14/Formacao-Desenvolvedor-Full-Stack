@@ -22,8 +22,8 @@ const MovieSearchEngine = () => {
 
     return (
         <div className="flex flex-col items-center justify-center p-6">
-            <h1 className="flex flex-row items-center text-3xl font-bold text-gray-800 mb-6">
-                <div className="mr-2">
+            <h1 className="flex md:flex-row flex-col items-center text-3xl font-bold text-center text-gray-800 mb-6">
+                <div className="m-2">
                     <BiCameraMovie />
                 </div>
                 Pesquisa de Filmes e Séries
