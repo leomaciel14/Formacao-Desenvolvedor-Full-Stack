@@ -3,8 +3,8 @@ import React from "react";
 const Footer = () => {
     return (
         <>
-            <footer className="flex flex-row g-12 p-12 bg-gradient-to-t from-black from-85% to-black/70 w-full h-72">
-                <div className="w-2/3 flex flex-row justify-between text-neutral-400">
+            <footer className="flex flex-row g-12 p-12 bg-gradient-to-t from-black from-85% to-black/70 w-full h-fit">
+                <div className="w-2/3 flex flex-col md:flex-row justify-between text-neutral-400">
                     <div className="">
                         <p className="py-2 font-md">
                             Dúvidas? Ligue <a

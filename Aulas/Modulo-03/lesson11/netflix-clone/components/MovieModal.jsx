@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { FaPlay, FaPlus } from "react-icons/fa";
 import { HiDownload } from "react-icons/hi";
@@ -10,19 +10,49 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CustomNextArrow, CustomPrevArrow } from "./CustomArrows";
 
-const smallerSliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: false,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
-};
-
 const MovieModal = ({ movie, onClose, movies, handleCardClick }) => {
     if (!movie) return null;
+
+    const [slidesToShow, setSlidesToShow] = useState(3);
+
+    useEffect(() => {
+        const updateSlidesToShow = () => {
+            const width = window.innerWidth;
+
+            switch (true) {
+                case width >= 2400:
+                    setSlidesToShow(11);
+                    break;
+                case width >= 1130:
+                    setSlidesToShow(7);
+                    break;
+                case width >= 768:
+                    setSlidesToShow(4);
+                    break;
+                default:
+                    setSlidesToShow(3);
+                    break;
+            }
+        };
+
+        updateSlidesToShow();
+        window.addEventListener("resize", updateSlidesToShow);
+
+        return () => {
+            window.removeEventListener("resize", updateSlidesToShow);
+        };
+    }, []);
+
+    const smallerSliderSettings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: slidesToShow,
+        slidesToScroll: 1,
+        autoplay: false,
+        prevArrow: <CustomPrevArrow />,
+        nextArrow: <CustomNextArrow />,
+    };
 
     return (
         <div className="fixed h-full w-full inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm">
@@ -38,20 +68,20 @@ const MovieModal = ({ movie, onClose, movies, handleCardClick }) => {
                     <img
                         src={movie.backdrop_path}
                         alt={movie.title}
-                        className="block rounded-t-2xl w-full h-64 object-cover"
+                        className="block rounded-t-2xl w-full md:w-screen h-64 md:h-fit object-cover 2xl:max-h-[820px]"
                     />
 
                     <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-black/90 rounded-t-2xl">
                     </div>
 
-                    <div className="absolute bottom-0 w-full flex flex-col justify-center pb-3 pl-3 text-left">
-                        <h2 className="text-white text-2xl font-bold z-20 pb-1">
+                    <div className="absolute bottom-0 w-full flex flex-col justify-center pb-3 2xl:pb-12 pl-3 2xl:pl-8 text-left">
+                        <h2 className="text-white text-2xl md:text-4xl xl:text-6xl 2xl:text-7xl font-bold z-20 pb-1">
                             {movie.title}
                         </h2>
                     </div>
                 </div>
 
-                <ul className="flex flex-col gap-2 px-4 w-full items-center font-semibold mt-3">
+                <ul className="flex flex-col 2xl:flex-row gap-2 px-4 w-full items-center font-semibold mt-3">
                     <li className="w-full">
                         <button className="flex flex-row h-full w-full items-center justify-center bg-white hover:bg-gray-300 transition-all text-black px-4 py-2 rounded">
                             <FaPlay className="mr-1" /> Play

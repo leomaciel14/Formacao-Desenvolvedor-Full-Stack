@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+
+import HomeHeader from "./HomeHeader";
+import HomeFooter from "./HomeFooter";
+
 import HomeCard from "../components/HomeCard";
 import MovieModal from "../components/MovieModal";
 import MovieSection from "./MovieSection";
 
-import HomeHeader from "./HomeHeader";
-import HomeFooter from "./HomeFooter";
+import Footer from "../components/Footer";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,7 +18,7 @@ const HomePage = () => {
     const [sections, setSections] = useState([]);
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
-
+    /*
     useEffect(() => {
         const fetchMovies = async () => {
             try {
@@ -83,6 +86,34 @@ const HomePage = () => {
         fetchBannerMovies();
         fetchSections();
     }, []);
+    */
+
+    useEffect(() => {
+        const fetchMovies = async () => {
+            try {
+                const response = await fetch("http://localhost:5000/0");
+                const data = await response.json();
+                setMovies(data[0].movies.slice(0, 10)); // Acessa o array e extrai os filmes
+            } catch (error) {
+                console.error("Erro ao buscar filmes:", error);
+            }
+        };
+    
+        const fetchSections = async () => {
+            try {
+                const response = await fetch("http://localhost:5000/1");
+                const data = await response.json();
+                setSections(data); // Define as seções diretamente
+            } catch (error) {
+                console.error("Erro ao buscar seções:", error);
+            }
+        };
+    
+        fetchMovies();
+        fetchSections();
+    }, []);
+    
+    
 
     const mainSliderSettings = {
         dots: false,
@@ -111,7 +142,7 @@ const HomePage = () => {
 
             <HomeHeader />
 
-            <div className="mt-40 w-full px-2">
+            <div className="mt-36 sm:mt-0 w-full">
                 <Slider {...mainSliderSettings}>
                     {movies.map((movie, index) => (
                         <HomeCardWrapper
@@ -142,8 +173,8 @@ const HomePage = () => {
                 )}
             </div>
 
-            <div className=" flex items-center text-center justify-center m-auto p-4 w-1 h-full pb-36">
-                Infos
+            <div className="flex w-full h-full justify-center m-0 pb-[120px] md:pb-0">
+                <Footer/>
             </div>
 
             <HomeFooter />
@@ -153,7 +184,7 @@ const HomePage = () => {
 
 const HomeCardWrapper = ({ movie, handleCardClick }) => {
     return (
-        <div className="p-2">
+        <div className="p-2 sm:p-0">
             <HomeCard movie={movie} handleCardClick={handleCardClick} />
         </div>
     );
