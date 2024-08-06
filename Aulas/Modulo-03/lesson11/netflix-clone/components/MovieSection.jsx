@@ -56,10 +56,18 @@ const MovieSection = ({ title, movies, handleCardClick }) => {
     return (
         <div className="w-full py-2">
             <h2 className="text-xl py-2">{title}</h2>
-            <Slider {...sliderSettings}>
+            <Slider {...sliderSettings} className="overflow-visible">
                 {movies.map((movie, index) => (
-                    <div className="p-1" key={index} onClick={() => handleCardClick(movie)}>
-                        <HomeCardSmall imgSrc={movie.poster_path} alt={movie.title} />
+                    <div className="p-1 overflow-visible" key={index} onClick={() => handleCardClick(movie)}>
+                        <HomeCardSmall
+                        title={movie.title}
+                        gender={movie.genres}
+                        releaseDate={movie.release_date}
+                        imgSrcBackdropp={movie.backdrop_path}
+                        imgSrc={movie.poster_path}
+                        alt={movie.title}
+                        onCardClick={() => handleCardClick(movie)}
+                        />
                     </div>
                 ))}
             </Slider>

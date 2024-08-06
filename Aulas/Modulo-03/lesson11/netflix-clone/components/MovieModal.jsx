@@ -9,6 +9,7 @@ import HomeCardSmall from "../components/HomeCardSmall";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CustomNextArrow, CustomPrevArrow } from "./CustomArrows";
+import './MovieModal.css'
 
 const MovieModal = ({ movie, onClose, movies, handleCardClick }) => {
     if (!movie) return null;
@@ -55,8 +56,9 @@ const MovieModal = ({ movie, onClose, movies, handleCardClick }) => {
     };
 
     return (
-        <div className="fixed h-full w-full inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm">
-            <div className="bg-gradient-to-b from-[#2C2B3B]/90 to-black/90 rounded-3xl max-w-full w-full h-[90vh] absolute bottom-0 overflow-auto">
+        <div className="fixed h-full w-full inset-0 flex items-center justify-center z-50">
+            <div id="container" className="modal-container-in fixed h-full w-full inset-0 bg-black bg-opacity-50 backdrop-blur-sm" ></div>
+            <div id="infos" className="modal-infos-in bg-gradient-to-b from-[#2C2B3B]/90 to-black/90 rounded-3xl max-w-full w-full h-[90vh] absolute bottom-0 overflow-auto">
                 <button
                     onClick={onClose}
                     className="z-30 absolute -top-1 -right-1 mt-4 mr-4 text-2xl bg-black/60 p-1 rounded-full text-gray-200 hover:text-gray-100"

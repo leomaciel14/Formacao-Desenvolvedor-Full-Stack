@@ -10,6 +10,7 @@ import MovieSection from "./MovieSection";
 
 import Footer from "../components/Footer";
 
+import './Dots.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CustomNextArrow, CustomPrevArrow } from "./CustomArrows";
@@ -93,30 +94,30 @@ const HomePage = () => {
             try {
                 const response = await fetch("http://localhost:5000/0");
                 const data = await response.json();
-                setMovies(data[0].movies.slice(0, 10)); // Acessa o array e extrai os filmes
+                setMovies(data[0].movies.slice(0, 10));
             } catch (error) {
                 console.error("Erro ao buscar filmes:", error);
             }
         };
-    
+
         const fetchSections = async () => {
             try {
                 const response = await fetch("http://localhost:5000/1");
                 const data = await response.json();
-                setSections(data); // Define as seções diretamente
+                setSections(data);
             } catch (error) {
                 console.error("Erro ao buscar seções:", error);
             }
         };
-    
+
         fetchMovies();
         fetchSections();
     }, []);
-    
-    
+
+
 
     const mainSliderSettings = {
-        dots: false,
+        dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
@@ -128,12 +129,26 @@ const HomePage = () => {
         nextArrow: <CustomNextArrow />,
     };
 
+
     const handleCardClick = (movie) => {
         setSelectedMovie(movie);
     };
 
     const closeModal = () => {
-        setSelectedMovie(null);
+        let modalInfos = document.getElementById('infos');
+        let modalContainer = document.getElementById('container');
+
+        modalInfos.classList.remove('modal-infos-in');
+        modalContainer.classList.remove('modal-container-in');
+
+        setTimeout(() => {
+            modalInfos.classList.add('modal-infos-out');
+            modalContainer.classList.add('modal-container-out');
+        }, 100);
+
+        setTimeout(() => {
+            setSelectedMovie(null);
+        }, 1100);
     };
 
     return (
@@ -142,7 +157,7 @@ const HomePage = () => {
 
             <HomeHeader />
 
-            <div className="mt-36 sm:mt-0 w-full">
+            <div className="mt-36 mb-5 sm:mt-0 w-full">
                 <Slider {...mainSliderSettings}>
                     {movies.map((movie, index) => (
                         <HomeCardWrapper
@@ -154,7 +169,7 @@ const HomePage = () => {
                 </Slider>
             </div>
 
-            <div className=" w-full px-4">
+            <div className="w-full px-4 h-fit">
                 {sections.map((section, index) => (
                     <MovieSection
                         key={index}
@@ -174,7 +189,7 @@ const HomePage = () => {
             </div>
 
             <div className="flex w-full h-full justify-center m-0 pb-[120px] md:pb-0">
-                <Footer/>
+                <Footer />
             </div>
 
             <HomeFooter />

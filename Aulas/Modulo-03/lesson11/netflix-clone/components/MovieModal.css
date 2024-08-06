@@ -1,0 +1,33 @@
+@keyframes movieIn {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.modal-infos-in {
+    animation: movieIn 0.6s forwards ease-in-out;
+}
+
+.modal-container-in {
+    animation: fadeIn 1s forwards ease-in-out;
+}
+
+.modal-infos-out {
+    animation: movieIn 0.6s reverse forwards ease-in-out;
+}
+
+.modal-container-out {
+    animation: fadeIn 1s reverse forwards ease-in-out;
+}
