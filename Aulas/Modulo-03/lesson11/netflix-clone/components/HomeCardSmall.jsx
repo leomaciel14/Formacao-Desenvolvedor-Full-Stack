@@ -5,16 +5,21 @@ const HomeCardSmall = ({ title, gender, releaseDate, imgSrcBackdropp, imgSrc, al
 
     const date = new Date(releaseDate);
     const year = date.getFullYear();
+    const gendersToShow = gender ? gender.slice(0, 2) : [];
+    const gendersString = gendersToShow.join(', ');
 
     return (
         <div className="
-        group
-        col-span-1
-        relative
-        w-full
-        h-auto
-        overflow-visible
-        ">
+            group
+            col-span-1
+            relative
+            w-full
+            h-auto
+            overflow-visible
+            cursor-pointer
+        "
+        onClick={onCardClick}
+        >
             <img
                 className="
                 border-2
@@ -36,19 +41,19 @@ const HomeCardSmall = ({ title, gender, releaseDate, imgSrcBackdropp, imgSrc, al
                 alt={alt}
             />
             <div className="
-            top-9
-            opacity-0
-            absolute
-            transition-all
-            duration-200
-            z-10
-            w-full
-            h-full
-            scale-0
-            group-hover:scale-125
-            group-hover:opacity-100
-            overflow-visible
-            shadow-4xl
+                top-9
+                opacity-0
+                absolute
+                transition-all
+                duration-200
+                z-10
+                w-full
+                h-full
+                scale-0
+                group-hover:scale-125
+                group-hover:opacity-100
+                overflow-visible
+                shadow-4xl
             ">
                 <img
                     className="
@@ -74,7 +79,7 @@ const HomeCardSmall = ({ title, gender, releaseDate, imgSrcBackdropp, imgSrc, al
                     rounded-b-md
                 ">
                     <div className="flex flex-row items-center gap-2">
-                        <div className="cursor-pointer w-8 h-8 min-h-7 min-w-7 bg-white rounded-full flex justify-center items-center transition-all hover:bg-neutral-300 " onClick={onCardClick}>
+                        <div className="cursor-pointer w-8 h-8 min-h-7 min-w-7 bg-white rounded-full flex justify-center items-center transition-all hover:bg-neutral-300 ">
                             <BsFillPlayFill className="text-black text-xl" />
                         </div>
                         <p className="text-xs font-bold">{title}</p>
@@ -83,7 +88,7 @@ const HomeCardSmall = ({ title, gender, releaseDate, imgSrcBackdropp, imgSrc, al
                         Lançamento <span className="text-white"> {year}</span>
                     </p>
                     <div className="">
-                        <p className="text-[0.6rem] text-gray-500">{gender[0]}</p>
+                        <p className="text-[0.6rem] text-gray-500">{gendersString}</p>
                     </div>
                 </div>
             </div>
