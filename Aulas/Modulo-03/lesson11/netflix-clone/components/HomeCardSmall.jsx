@@ -41,7 +41,9 @@ const HomeCardSmall = ({ title, gender, releaseDate, imgSrcBackdropp, imgSrc, al
                 alt={alt}
             />
             <div className="
-                top-9
+                md:top-9
+                xl:top-10
+                2xl:top-20
                 opacity-0
                 absolute
                 transition-all

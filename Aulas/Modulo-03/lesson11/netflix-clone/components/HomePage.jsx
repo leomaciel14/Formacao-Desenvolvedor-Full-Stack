@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 import Slider from "react-slick";
 
 import HomeHeader from "./HomeHeader";
 import HomeFooter from "./HomeFooter";
 
 import HomeCardWrapper from "./HomeCardWrapper"
-import MovieModal from "../components/MovieModal";
 import MovieSection from "./MovieSection";
 
 import Footer from "../components/Footer";
@@ -18,9 +18,12 @@ import { CustomNextArrow, CustomPrevArrow } from "./CustomArrows";
 import HomeCardSmall from "../components/HomeCardSmall";
 
 const HomePage = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+
     const [movies, setMovies] = useState([]);
     const [sections, setSections] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
     const [searchResults, setSearchResults] = useState([]);
 
     /*
@@ -133,26 +136,8 @@ const HomePage = () => {
     };
 
     const handleCardClick = (movie) => {
-        setSelectedMovie(movie);
+        navigate(`/movie/${movie._id}`, { state: { backgroundLocation: location } });
     };
-
-    const closeModal = () => {
-        let modalInfos = document.getElementById('infos');
-        let modalContainer = document.getElementById('container');
-
-        modalInfos.classList.remove('modal-infos-in');
-        modalContainer.classList.remove('modal-container-in');
-
-        setTimeout(() => {
-            modalInfos.classList.add('modal-infos-out');
-            modalContainer.classList.add('modal-container-out');
-        }, 100);
-
-        setTimeout(() => {
-            setSelectedMovie(null);
-        }, 1100);
-    };
-
 
     const [slidesToShow, setSlidesToShow] = useState('grid-cols-3');
     useEffect(() => {
@@ -203,14 +188,6 @@ const HomePage = () => {
                                     alt={movie.title}
                                     onCardClick={() => handleCardClick(movie)}
                                 />
-                                {selectedMovie && (
-                                    <MovieModal
-                                        movie={selectedMovie}
-                                        onClose={closeModal}
-                                        movies={sections.flatMap(section => section.movies)}
-                                        handleCardClick={handleCardClick}
-                                    />
-                                )}
                             </div>
                         ))}
                     </div>
@@ -238,14 +215,6 @@ const HomePage = () => {
                                 handleCardClick={handleCardClick}
                             />
                         ))}
-                        {selectedMovie && (
-                            <MovieModal
-                                movie={selectedMovie}
-                                onClose={closeModal}
-                                movies={sections.flatMap(section => section.movies)}
-                                handleCardClick={handleCardClick}
-                            />
-                        )}
                     </div>
                 </>
             )}

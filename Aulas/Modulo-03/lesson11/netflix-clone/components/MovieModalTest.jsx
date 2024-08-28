@@ -4,82 +4,86 @@ import { FaPlay, FaPlus } from "react-icons/fa";
 import { HiDownload } from "react-icons/hi";
 import { LuStar } from "react-icons/lu";
 import { GrShareOption } from "react-icons/gr";
-import Slider from "react-slick";
-import HomeCardSmall from "../components/HomeCardSmall";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { CustomNextArrow, CustomPrevArrow } from "./CustomArrows";
-import './MovieModal.css'
-import { useParams } from 'react-router-dom';
+import './MovieModal.css';
+import { useParams , useNavigate } from 'react-router-dom';
 
-const MovieModal = ({ onClose, movies, handleCardClick }) => {
+const MovieModalTest = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+    const [movie, setMovie] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState("");
 
-    // Converte o ID da URL para número
-    const movieId = parseInt(id, 10);
-    console.log("Received movie ID from URL:", movieId);
+    const closeModal = () => {
+        let modalInfos = document.getElementById('infos');
+        let modalContainer = document.getElementById('container');
 
-    // Verifica se os filmes estão carregados
-    if (!movies || movies.length === 0) return null;
+        modalInfos.classList.remove('modal-infos-in');
+        modalContainer.classList.remove('modal-container-in');
 
-    // Encontra o filme correto
-    const movie = movies.find(movie => movie._id === movieId);
-    console.log("Found movie:", movie);
+        setTimeout(() => {
+            modalInfos.classList.add('modal-infos-out');
+            modalContainer.classList.add('modal-container-out');
+        }, 100);
 
-    // Se o filme não for encontrado, retorne null
-    if (!movie) return <p>Filme não encontrado</p>;
-
-    const [slidesToShow, setSlidesToShow] = useState(3);
+        setTimeout(() => {
+            setMovie(null);
+            navigate(-1);
+        }, 1100);
+    };
 
     useEffect(() => {
-        console.log("MovieModal rendered with movie:", movie);
-        const updateSlidesToShow = () => {
-            const width = window.innerWidth;
+        const fetchMovieData = async () => {
+            try {
+                const response0 = await fetch(`http://192.168.0.16:3000/0`);
+                const response1 = await fetch(`http://192.168.0.16:3000/1`);
 
-            switch (true) {
-                case width >= 2400:
-                    setSlidesToShow(11);
-                    break;
-                case width >= 1130:
-                    setSlidesToShow(7);
-                    break;
-                case width >= 768:
-                    setSlidesToShow(4);
-                    break;
-                default:
-                    setSlidesToShow(3);
-                    break;
+                const data0 = await response0.json();
+                const data1 = await response1.json();
+
+                // Combina todos os filmes de ambos os endpoints
+                const allMovies = [
+                    ...data0.flatMap(section => section.movies || data0),
+                    ...data1.flatMap(section => section.movies || data1)
+                ];
+
+                // Filtra os filmes com base na consulta de pesquisa
+                const filteredMovies = allMovies.filter(movie =>
+                    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+
+                // Encontra o filme específico pelo ID após a filtragem
+                const movieData = filteredMovies.find(movie => movie._id === parseInt(id, 10));
+
+                if (movieData) {
+                    setMovie(movieData);
+                } else {
+                    console.error('Filme não encontrado');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar os dados do filme:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
-        updateSlidesToShow();
-        window.addEventListener("resize", updateSlidesToShow);
+        fetchMovieData();
+    }, [id, searchQuery]); // Adiciona searchQuery como dependência para refetch ao pesquisar
 
-        return () => {
-            window.removeEventListener("resize", updateSlidesToShow);
-        };
-    }, []);
-
-    const smallerSliderSettings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: slidesToShow,
-        slidesToScroll: 1,
-        autoplay: false,
-        prevArrow: <CustomPrevArrow />,
-        nextArrow: <CustomNextArrow />,
-    };
+    if (loading) return <p>Carregando...</p>;
+    if (!movie) return <p>Filme não encontrado</p>;
 
     return (
         <div className="fixed h-full w-full inset-0 flex items-center justify-center z-50">
+
             <div id="container" className="modal-container-in fixed h-full w-full inset-0 bg-black bg-opacity-50 backdrop-blur-sm" ></div>
             <div id="infos" className="modal-infos-in bg-gradient-to-b from-[#2C2B3B]/90 to-black/90 rounded-3xl max-w-full w-full h-[90vh] absolute bottom-0 overflow-auto">
                 <button
-                    onClick={onClose}
                     className="z-30 absolute -top-1 -right-1 mt-4 mr-4 text-2xl bg-black/60 p-1 rounded-full text-gray-200 hover:text-gray-100"
+                    onClick={closeModal}
                 >
                     <IoClose />
+
                 </button>
 
                 <div className="relative w-fit h-fit rounded-2xl">
@@ -141,31 +145,9 @@ const MovieModal = ({ onClose, movies, handleCardClick }) => {
                         <p className="text-sm">Compartilhe</p>
                     </li>
                 </ul>
-
-                <div className="w-full px-3">
-                    <h2 className="text-xl py-4">Séries Populares</h2>
-                    {movies.length === 0
-                        ? <p>Carregando séries populares...</p>
-                        : (
-                            <Slider {...smallerSliderSettings}>
-                                {movies.map((movie, index) => (
-                                    <div
-                                        className="p-1"
-                                        key={index}
-                                        onClick={() => handleCardClick(movie)}
-                                    >
-                                        <HomeCardSmall
-                                            imgSrc={movie.poster_path}
-                                            alt={movie.title}
-                                        />
-                                    </div>
-                                ))}
-                            </Slider>
-                        )}
-                </div>
             </div>
         </div>
     );
 };
 
-export default MovieModal;
+export default MovieModalTest;
