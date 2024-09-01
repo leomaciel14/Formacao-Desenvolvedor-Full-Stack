@@ -21,17 +21,17 @@ const WhoWatch = () => {
 
                 <div className="flex flex-col items-center justify-center w-dvw h-full m-auto p-4 pb-32">
                     <ul className="grid gap-1 grid-cols-2 sm:grid-cols-4 items-center justify-center">
-                        <li onClick={() => handleAvatarSelect('./components/imgs/avatar-01.jpg','Leonardo')} className="flex flex-col items-center p-2 transition-all brightness-50 hover:brightness-100 hover:scale-105 cursor-pointer">
-                            <img className="rounded-xl w-28" src="./components/imgs/avatar-01.jpg" alt="Leonardo" />
-                            <p className="mt-2 text-2xl">Leonardo</p>
+                        <li onClick={() => handleAvatarSelect('./components/imgs/avatar-01.jpg','Baby Boss')} className="flex flex-col items-center p-2 transition-all brightness-50 hover:brightness-100 hover:scale-105 cursor-pointer">
+                            <img className="rounded-xl w-28" src="./components/imgs/avatar-01.jpg" alt="Baby Boss" />
+                            <p className="mt-2 text-2xl">Baby Boss</p>
                         </li>
-                        <li onClick={() => handleAvatarSelect('./components/imgs/avatar-02.jpg','Família')} className="flex flex-col items-center p-2 transition-all brightness-50 hover:brightness-100 hover:scale-105 cursor-pointer">
-                            <img className="rounded-xl w-28" src="./components/imgs/avatar-02.jpg" alt="Família" />
-                            <p className="mt-2 text-2xl">Família</p>
+                        <li onClick={() => handleAvatarSelect('./components/imgs/avatar-02.jpg','Pingo')} className="flex flex-col items-center p-2 transition-all brightness-50 hover:brightness-100 hover:scale-105 cursor-pointer">
+                            <img className="rounded-xl w-28" src="./components/imgs/avatar-02.jpg" alt="Pingo" />
+                            <p className="mt-2 text-2xl">Pingo</p>
                         </li>
-                        <li onClick={() => handleAvatarSelect('./components/imgs/avatar-03.jpg','Juliana')} className="flex flex-col items-center p-2 transition-all brightness-50 hover:brightness-100 hover:scale-105 cursor-pointer">
-                            <img className="rounded-xl w-28" src="./components/imgs/avatar-03.jpg" alt="Juliana" />
-                            <p className="mt-2 text-2xl">Juliana</p>
+                        <li onClick={() => handleAvatarSelect('./components/imgs/avatar-03.jpg','Vi')} className="flex flex-col items-center p-2 transition-all brightness-50 hover:brightness-100 hover:scale-105 cursor-pointer">
+                            <img className="rounded-xl w-28" src="./components/imgs/avatar-03.jpg" alt="Vi" />
+                            <p className="mt-2 text-2xl">Vi</p>
                         </li>
                         <li className="flex flex-col items-center p-2 transition-all brightness-50 hover:brightness-100 hover:scale-105 cursor-pointer">
                             <img className="rounded-xl w-28" src="./components/imgs/new-avatar.png" alt="Novo Usuário" />

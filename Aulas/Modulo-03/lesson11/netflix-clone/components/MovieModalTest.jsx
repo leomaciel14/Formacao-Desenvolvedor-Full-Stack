@@ -5,14 +5,13 @@ import { HiDownload } from "react-icons/hi";
 import { LuStar } from "react-icons/lu";
 import { GrShareOption } from "react-icons/gr";
 import './MovieModal.css';
-import { useParams , useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const MovieModalTest = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [searchQuery, setSearchQuery] = useState("");
 
     const closeModal = () => {
         let modalInfos = document.getElementById('infos');
@@ -35,30 +34,18 @@ const MovieModalTest = () => {
     useEffect(() => {
         const fetchMovieData = async () => {
             try {
-                const response0 = await fetch(`http://192.168.0.16:3000/0`);
-                const response1 = await fetch(`http://192.168.0.16:3000/1`);
+                // Tenta carregar do cache primeiro
+                const cachedData = localStorage.getItem('moviesData');
+                if (cachedData) {
+                    const parsedData = JSON.parse(cachedData);
+                    const allMovies = parsedData.flatMap(section => section.movies);
+                    const movieData = allMovies.find(movie => movie._id === parseInt(id, 10));
 
-                const data0 = await response0.json();
-                const data1 = await response1.json();
-
-                // Combina todos os filmes de ambos os endpoints
-                const allMovies = [
-                    ...data0.flatMap(section => section.movies || data0),
-                    ...data1.flatMap(section => section.movies || data1)
-                ];
-
-                // Filtra os filmes com base na consulta de pesquisa
-                const filteredMovies = allMovies.filter(movie =>
-                    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-                );
-
-                // Encontra o filme específico pelo ID após a filtragem
-                const movieData = filteredMovies.find(movie => movie._id === parseInt(id, 10));
-
-                if (movieData) {
-                    setMovie(movieData);
-                } else {
-                    console.error('Filme não encontrado');
+                    if (movieData) {
+                        setMovie(movieData);
+                    } else {
+                        console.error('Filme não encontrado');
+                    }
                 }
             } catch (error) {
                 console.error('Erro ao buscar os dados do filme:', error);
@@ -68,14 +55,13 @@ const MovieModalTest = () => {
         };
 
         fetchMovieData();
-    }, [id, searchQuery]); // Adiciona searchQuery como dependência para refetch ao pesquisar
+    }, [id]);
 
     if (loading) return <p>Carregando...</p>;
     if (!movie) return <p>Filme não encontrado</p>;
 
     return (
         <div className="fixed h-full w-full inset-0 flex items-center justify-center z-50">
-
             <div id="container" className="modal-container-in fixed h-full w-full inset-0 bg-black bg-opacity-50 backdrop-blur-sm" ></div>
             <div id="infos" className="modal-infos-in bg-gradient-to-b from-[#2C2B3B]/90 to-black/90 rounded-3xl max-w-full w-full h-[90vh] absolute bottom-0 overflow-auto">
                 <button
@@ -83,7 +69,6 @@ const MovieModalTest = () => {
                     onClick={closeModal}
                 >
                     <IoClose />
-
                 </button>
 
                 <div className="relative w-fit h-fit rounded-2xl">
@@ -96,7 +81,7 @@ const MovieModalTest = () => {
                     <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-black/90 rounded-t-2xl">
                     </div>
 
-                    <div className="absolute bottom-0 w-full flex flex-col justify-center pb-3 2xl:pb-12 pl-3 2xl:pl-8 text-left">
+                    <div className="absolute bottom-0 w-full flex-col justify-center pb-3 2xl:pb-12 pl-3 2xl:pl-8 text-left">
                         <h2 className="text-white text-2xl md:text-4xl xl:text-6xl 2xl:text-7xl font-bold z-20 pb-1">
                             {movie.title}
                         </h2>

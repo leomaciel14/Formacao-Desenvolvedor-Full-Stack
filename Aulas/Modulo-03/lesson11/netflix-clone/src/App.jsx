@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
 
 import "./App.css";
 import LoginHome from "../components/LoginHome";
@@ -36,6 +36,7 @@ function App() {
     <div className="w-full h-dvh">
       <ToastContainer theme="dark" />
       <Routes location={backgroundLocation || location}>
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/whowatch" element={<WhoWatch />} />
         <Route path="/login" element={<LoginHome />} />
